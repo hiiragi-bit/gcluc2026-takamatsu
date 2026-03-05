@@ -93,8 +93,8 @@ void Init(void)
 
 
 	//”’ì
-
-
+	ADD_RESOURCE("Player", CImage::CreateImage("Player/Player.png", Player::_anim_data, 16, 16));
+	ObjectBase::Add(new Player(CVector3D(100, 100, 0), false));
 
 
 
