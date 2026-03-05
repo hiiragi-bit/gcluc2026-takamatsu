@@ -8,11 +8,11 @@
     <ClInclude Include="Game\Player.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Enemy.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="UI\HP.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Witch.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -23,11 +23,11 @@
     <ClCompile Include="Game\Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Enemy.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="UI\HP.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Witch.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

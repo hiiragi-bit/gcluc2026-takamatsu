@@ -20,15 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\ObjectBase.h" />
-    <ClInclude Include="Game\Enemy.h" />
     <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\Witch.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="UI\HP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\ObjectBase.cpp" />
-    <ClCompile Include="Game\Enemy.cpp" />
     <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\Witch.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\HP.cpp" />
   </ItemGroup>

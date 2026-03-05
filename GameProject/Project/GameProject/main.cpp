@@ -1,6 +1,6 @@
 #include "Base/ObjectBase.h"
 #include "Game/Player.h"
-#include "Game/Enemy.h"
+#include "Game/Witch.h"
 #include "UI/HP.h"
 
 void MainLoop(void) {
@@ -45,10 +45,10 @@ void Init(void)
 	CInput::SetButton(0, CInput::eButton4, VK_LSHIFT);
 	CInput::SetButton(0, CInput::eButton5, VK_SPACE);
 	CInput::SetButton(0, CInput::eButton10, VK_RETURN);
-	CInput::SetButton(0, CInput::eUp, VK_UP);
-	CInput::SetButton(0, CInput::eDown, VK_DOWN);
-	CInput::SetButton(0, CInput::eLeft, VK_LEFT);
-	CInput::SetButton(0, CInput::eRight, VK_RIGHT);
+	CInput::SetButton(0, CInput::eUp, 'W');
+	CInput::SetButton(0, CInput::eDown, 'S');
+	CInput::SetButton(0, CInput::eLeft, 'A');
+	CInput::SetButton(0, CInput::eRight, 'D');
 	CInput::SetButton(0, CInput::eMouseL, VK_LBUTTON);
 	CInput::SetButton(0, CInput::eMouseR, VK_RBUTTON);
 	CInput::SetButton(0, CInput::eMouseC, VK_MBUTTON);
@@ -90,10 +90,6 @@ void Init(void)
 	//ÉQÅ[ÉÄãNìÆéûÇ…àÍìxÇæÇØåƒÇŒÇÍÇÈ
 	//-----------------------------------------------------
 	
-	//Base::Add(new Player(CVector2D(300, 800)));
-	//Base::Add(new Enemy(CVector2D(1500, 800)));
-	//Base::Add(new HP(CVector2D(0, 0)));
-
 
 
 	//îíêÏ
@@ -103,8 +99,8 @@ void Init(void)
 
 
 	//òaêÚ
-
-
+	//ADD_RESOURCE("Witch", CImage::CreateImage("Enemy/.png"));
+	//ObjectBase::Add(new Witch(CVector3D(500, 540, 0)));
 
 
 
