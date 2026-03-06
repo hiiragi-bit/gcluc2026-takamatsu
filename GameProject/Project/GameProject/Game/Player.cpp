@@ -3,9 +3,31 @@
 static TexAnim _idle[] = {
 	{0,5},
 	{1,5},
-	{2,5},
-	{3,5},
 };
+
+static TexAnim _attack[] = {
+	{7,5},
+	{8,5},
+};
+static TexAnim _jump[] = {
+	{21,5},
+	{22,5},
+	{23,5},
+	{24,5},
+	{25,5},
+	{26,5},
+};
+
+static TexAnim _damage[] = {
+	{49,5},
+	{50,5},
+	//{51,5},
+};
+static TexAnim _death[] = {
+	{28,5},
+	{29,5},
+};
+/*
 static TexAnim _run[] = {
 	{9,5},
 	{10,5},
@@ -14,51 +36,14 @@ static TexAnim _run[] = {
 	{13,5},
 	//{14,5},
 };
-static TexAnim _attack[] = {
-	{17,5},
-	{18,5},
-	{19,5},
-	//{20,5},
-};
-static TexAnim _jumpup[] = {
-	{25,5},
-	{26,5},
-	//{27,5},
-};
-static TexAnim _jumpdouble[] = {
-	{33,5},
-	{34,5},
-	//{35,5},
-};
-static TexAnim _jumpdown[] = {
-	{41,5},
-	{42,5},
-	//{43,5},
-};
-static TexAnim _damage[] = {
-	{49,5},
-	{50,5},
-	//{51,5},
-};
-static TexAnim _death[] = {
-	{57,5},
-	{58,5},
-	{59,5},
-	{60,5},
-	{61,5},
-	{62,5},
-	{63,5},
-	//{64,5},
-};
+*/
 TexAnimData Player::_anim_data[] = {
 	ANIMDATA(_idle),
-	ANIMDATA(_run),
 	ANIMDATA(_attack),
-	ANIMDATA(_jumpup),
-	ANIMDATA(_jumpdouble),
-	ANIMDATA(_jumpdown),
+	ANIMDATA(_jump),
 	ANIMDATA(_damage),
 	ANIMDATA(_death),
+	//ANIMDATA(_run),
 };
 
 Player::Player(const CVector3D& pos, bool flip)
@@ -140,22 +125,14 @@ void Player::StateIdle()
 	//ジャンプ中なら
 	if (!m_is_ground)
 	{
-		if (m_vec.y > 0)
-			//上昇アニメーション
-			m_img.ChangeAnimation(eAnimJumpUp, false);
-		else
-			//下降アニメーション
-			m_img.ChangeAnimation(eAnimJumpDown, false);
+		//上昇アニメーション
+		m_img.ChangeAnimation(eAnimJump, false);
 	}
 	//地面にいるなら
 	else
 	{
-		if (move_flag)
-			//走るアニメーション
-			m_img.ChangeAnimation(eAnimRun);
-		else
-			//待機アニメーション
-			m_img.ChangeAnimation(eAnimIdle);
+		//待機アニメーション
+		m_img.ChangeAnimation(eAnimIdle);
 	}
 }
 

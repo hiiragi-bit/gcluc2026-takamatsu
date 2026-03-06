@@ -6,13 +6,11 @@ private:
 	//アニメーションの種類
 	enum {
 		eAnimIdle = 0,
-		eAnimRun,
 		eAnimAttack,
-		eAnimJumpDown,
-		eAnimDouble,
-		eAnimJumpUp,
+		eAnimJump,
 		eAnimDamage,
 		eAnimDeath,
+		eAnimRun,
 	};
 
 	CImage m_img;		//プレイヤーの画像
@@ -30,10 +28,6 @@ private:
 		eState_Damage1,
 		eState_Damage2,
 		eState_Down,
-		eState_P1,
-		eState_P2,
-		eState_P1P2,
-		eState_P2P1,
 	};
 	//状態変数
 	int m_state;
