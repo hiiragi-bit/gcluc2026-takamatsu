@@ -100,6 +100,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//m_hp = 6;
 }
 
+//待機状態
 void Player::StateIdle()
 {
 	//移動量
@@ -116,6 +117,7 @@ void Player::StateIdle()
 		m_pos.x -= move_speed;
 		//反転フラグ
 		m_flip = true;
+		//移動フラグ
 		move_flag = true;
 	}
 
@@ -126,6 +128,7 @@ void Player::StateIdle()
 		m_pos.x += move_speed;
 		//反転フラグ
 		m_flip = false;
+		//移動フラグ
 		move_flag = true;
 	}
 
@@ -133,8 +136,8 @@ void Player::StateIdle()
 	if (HOLD(CInput::eUp))
 	{
 		//移動量を設定
-		m_pos.z += move_speed;
-		//反転フラグ
+		m_pos.z -= move_speed;
+		//移動フラグ
 		move_flag = true;
 	}
 
@@ -142,8 +145,8 @@ void Player::StateIdle()
 	if (HOLD(CInput::eDown))
 	{
 		//移動量を設定
-		m_pos.z -= move_speed;
-		//反転フラグ
+		m_pos.z += move_speed;
+		//移動フラグ
 		move_flag = true;
 	}
 
@@ -175,6 +178,7 @@ void Player::StateIdle()
 	}
 }
 
+//攻撃状態
 void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
@@ -187,8 +191,29 @@ void Player::StateAttack()
 	}
 }
 
+//ダメージ状態
+void Player::StateDamage()
+{
+}
+
+//死亡状態
+void Player::StateDeath()
+{
+	//死亡アニメーションへ変更
+	m_img.ChangeAnimation(eAnimDeath, false);
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd())
+	{
+		//プレイヤーを削除
+		SetKill();
+	}
+}
+
 void Player::Update()
 {
+	m_pos_old = m_pos;
+
+	//状態の切り替え
 	switch (m_state)
 	{
 	//待機状態
@@ -200,23 +225,29 @@ void Player::Update()
 		StateAttack();
 		break;
 	}
-	m_pos_old = m_pos;
+	
 	//落ちていたら落下状態へ移行
 	if (m_is_ground && m_vec.y > GRAVITY * 4)
 		m_is_ground = false;
 	//重力による落下
 	m_vec.y += GRAVITY;
 	m_pos += m_vec;
+
+	//プレイヤーのy座標が1080以上なら
 	if (m_pos.y >= 1080)
 	{
+		//プレイヤーのy座標を1080にし、
+		//接地判定をtrueにする
 		m_pos.y = 1080;
 		m_vec.y = 1080;
 		m_is_ground = true;
 	}
+
 	//アニメーション更新
 	m_img.UpdateAnimation();
 }
 
+//描画処理
 void Player::Draw(){
 	//位置設定
 	m_img.SetPos(GetScreenPos(m_pos));
@@ -230,10 +261,26 @@ void Player::Draw(){
 	//DrawRect();
 }
 
+//当たり判定
 void Player::Collision(ObjectBase* b)
 {
 }
 
+//ダメージ処理
 void Player::TakeDamage(int damage)
 {
+	//HP減少、下限0
+	m_hp = max(m_hp - damage, 0);
+	//HPが0以下なら
+	if (m_hp <= 0)
+	{
+		//死亡状態へ移行
+		m_state = eState_Death;
+	}
+	//HPが0以下でないなら
+	else
+	{
+		//ダメージ状態へ移行
+		m_state = eState_Damage;
+	}
 }

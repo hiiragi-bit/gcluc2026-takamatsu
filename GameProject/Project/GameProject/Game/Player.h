@@ -31,9 +31,17 @@ private:
 	};
 	//状態変数
 	int m_state;
+
 	//各状態での挙動
+	
+	//待機状態
 	void StateIdle();
+	//攻撃状態
 	void StateAttack();
+	//ダメージ状態
+	void StateDamage();
+	//死亡状態
+	void StateDeath();
 
 public:
 	//コンストラクタ
