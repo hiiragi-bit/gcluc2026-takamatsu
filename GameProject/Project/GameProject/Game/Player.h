@@ -5,12 +5,14 @@ class Player :public ObjectBase {
 private:
 	//アニメーションの種類
 	enum {
-		eAnimIdle = 0,
-		eAnimAttack,
-		eAnimJump,
-		eAnimDamage,
-		eAnimDeath,
-		eAnimRun,
+		eAnimIdle = 0,		//待機アニメーション
+		eAnimAttack,		//攻撃アニメーション
+		eAnimDetransform,	//変身解除アニメーション
+		eAnimJump,			//ジャンプアニメーション
+		eAnimDeath,			//死亡アニメーション
+		eAnimAbsorption,	//吸収アニメーション
+		eAnimRun,			//走るアニメーション
+		eAnimDamage,		//ダメージアニメーション
 	};
 
 	CImage m_img;		//プレイヤーの画像
@@ -22,17 +24,16 @@ private:
 
 	//状態
 	enum {
-		eState_Idle,
-		eState_Attack1,
-		eState_Attack2,
-		eState_Damage1,
-		eState_Damage2,
-		eState_Down,
+		eState_Idle,	//待機状態
+		eState_Attack,	//攻撃状態
+		eState_Damage,	//ダメージ状態
+		eState_Death,	//死亡状態
 	};
 	//状態変数
 	int m_state;
 	//各状態での挙動
 	void StateIdle();
+	void StateAttack();
 
 public:
 	//コンストラクタ

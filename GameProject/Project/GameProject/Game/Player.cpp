@@ -1,14 +1,25 @@
 #include "Player.h"
 
+//待機アニメーション
 static TexAnim _idle[] = {
-	{0,5},
-	{1,5},
+	{0,10},
+	{1,10},
 };
 
+//攻撃アニメーション
 static TexAnim _attack[] = {
 	{7,5},
 	{8,5},
 };
+
+//変身解除アニメーション
+static TexAnim _detransform[] = {
+	{14,5},
+	{15,5},
+	{16,5},
+};
+
+//ジャンプアニメーション
 static TexAnim _jump[] = {
 	{21,5},
 	{22,5},
@@ -18,15 +29,19 @@ static TexAnim _jump[] = {
 	{26,5},
 };
 
-static TexAnim _damage[] = {
-	{49,5},
-	{50,5},
-	//{51,5},
-};
+//死亡アニメーション
 static TexAnim _death[] = {
 	{28,5},
 	{29,5},
 };
+
+//吸収アニメーション
+static TexAnim _absorption[] = {
+	{28,5},
+	{29,5},
+};
+
+//走るアニメーション
 /*
 static TexAnim _run[] = {
 	{9,5},
@@ -37,13 +52,25 @@ static TexAnim _run[] = {
 	//{14,5},
 };
 */
+
+//ダメージアニメーション
+/*
+static TexAnim _damage[] = {
+	{49,5},
+	{50,5},
+	{51,5},
+};
+*/
+
 TexAnimData Player::_anim_data[] = {
 	ANIMDATA(_idle),
 	ANIMDATA(_attack),
+	ANIMDATA(_detransform),
 	ANIMDATA(_jump),
-	ANIMDATA(_damage),
 	ANIMDATA(_death),
+	ANIMDATA(_absorption),
 	//ANIMDATA(_run),
+	//ANIMDATA(_damage),
 };
 
 Player::Player(const CVector3D& pos, bool flip)
@@ -91,6 +118,7 @@ void Player::StateIdle()
 		m_flip = true;
 		move_flag = true;
 	}
+
 	//右移動
 	if (HOLD(CInput::eRight))
 	{
@@ -100,6 +128,7 @@ void Player::StateIdle()
 		m_flip = false;
 		move_flag = true;
 	}
+
 	//上移動
 	if (HOLD(CInput::eUp))
 	{
@@ -108,6 +137,7 @@ void Player::StateIdle()
 		//反転フラグ
 		move_flag = true;
 	}
+
 	//下移動
 	if (HOLD(CInput::eDown))
 	{
@@ -116,6 +146,15 @@ void Player::StateIdle()
 		//反転フラグ
 		move_flag = true;
 	}
+
+	//Zキーで攻撃
+	if (PUSH(CInput::eButton1))
+	{
+		//攻撃状態へ移行
+		m_state = eState_Attack;
+		m_attack_no++;
+	}
+
 	//SPACEキーでプレイヤーがジャンプ
 	if (m_is_ground && PUSH(CInput::eButton5))
 	{
@@ -136,13 +175,29 @@ void Player::StateIdle()
 	}
 }
 
+void Player::StateAttack()
+{
+	//攻撃アニメーションへ変更
+	m_img.ChangeAnimation(eAnimAttack, false);
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd())
+	{
+		//通常状態へ移行
+		m_state = eState_Idle;
+	}
+}
+
 void Player::Update()
 {
 	switch (m_state)
 	{
-		//通常状態
+	//待機状態
 	case eState_Idle:
 		StateIdle();
+		break;
+	//攻撃状態
+	case eState_Attack:
+		StateAttack();
 		break;
 	}
 	m_pos_old = m_pos;
