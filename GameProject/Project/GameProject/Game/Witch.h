@@ -4,17 +4,17 @@
 //ˆÚ“®‘¬“x
 #define MOVE_SPEED 8
 //UŒ‚ŠÔŠu
-#define ATTACK_COOLDOWN_TIME 3.0f
+#define ATTACK_COOLDOWN_TIME 120.0f
 //–³“GŠÔ
-#define INVINCIBLE_TIME 1.0f
+#define INVINCIBLE_TIME 60.0f
 
 class Witch :public ObjectBase {
 private:
 	enum class EState {
 		Idle,
 		Run,
-		Attack,
 		Damage,
+		Attack,
 		Death,
 	};
 	CImage m_img;
@@ -31,10 +31,18 @@ public:
 	void Update() override;
 	void Draw() override;
 	void StateIdle();
-	void StateAttack();
 	void StateDamage();
+	void StateAttack();
 	void StateDeath();
 	void TakeDamage(int damage);
+	/// <summary>
+	/// –³“GŠÔ‚Ì”»’è
+	/// </summary>
+	/// <returns>–³“GŠÔ’†‚È‚çtrue</returns>
+	bool GetInvncible() const {
+		if (m_invincibleCnt != 0) return true;
+		return false;
+	}
 	/// <summary>
 	/// ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£
 	/// </summary>
@@ -42,5 +50,6 @@ public:
 	/// <param name="range">‘ª‚è‚½‚¢‹——£</param>
 	/// <returns></returns>
 	bool RangePlayer(const CVector3D& pos, const CVector3D& range);
+	CVector2D CalcScreenPos(bool grounded = false) const;
 	static TexAnimData _anim_data[];
 };

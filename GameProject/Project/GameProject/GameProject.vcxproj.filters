@@ -14,6 +14,12 @@
     <ClInclude Include="Game\Witch.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Magic.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Swordsman.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -27,6 +33,12 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Game\Witch.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Magic.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Swordsman.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
