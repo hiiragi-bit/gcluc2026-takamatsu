@@ -1,7 +1,8 @@
 #pragma once
 #include "Base/ObjectBase.h"
 
-class Player :public ObjectBase {
+class Player :public ObjectBase 
+{
 private:
 	//アニメーションの種類
 	enum {
@@ -24,10 +25,12 @@ private:
 
 	//状態
 	enum {
-		eState_Idle,	//待機状態
-		eState_Attack,	//攻撃状態
-		eState_Damage,	//ダメージ状態
-		eState_Death,	//死亡状態
+		eState_Idle,		//待機状態
+		eState_Attack,		//攻撃状態
+		eState_Absorption,	//吸収状態
+		eState_Detransform,	//変身解除状態
+		eState_Damage,		//ダメージ状態
+		eState_Death,		//死亡状態
 	};
 	//状態変数
 	int m_state;
@@ -38,6 +41,10 @@ private:
 	void StateIdle();
 	//攻撃状態
 	void StateAttack();
+	//吸収状態
+	void StateAbsorption();
+	//変身解除状態
+	void StateDetransform();
 	//ダメージ状態
 	void StateDamage();
 	//死亡状態
