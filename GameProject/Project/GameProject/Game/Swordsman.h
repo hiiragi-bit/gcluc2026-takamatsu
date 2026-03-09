@@ -2,13 +2,13 @@
 #include "Base/ObjectBase.h"
 
 //à⁄ìÆë¨ìx
-#define WITCH_MOVE_SPEED 6
+#define SWORDSMAN_MOVE_SPEED 8
 //çUåÇä‘äu
-#define WITCH_ATTACK_COOLDOWN_TIME 120.0f
+#define SWORDSMAN_ATTACK_COOLDOWN_TIME 60.0f
 //ñ≥ìGéûä‘
-#define WITCH_INVINCIBLE_TIME 60.0f
+#define SWORDSMAN_INVINCIBLE_TIME 60.0f
 
-class Witch :public ObjectBase {
+class Swordsman :public ObjectBase {
 private:
 	enum class EState {
 		Idle,
@@ -26,8 +26,8 @@ private:
 	bool m_flip;
 	CVector3D m_range;			//çUåÇîÕàÕ
 public:
-	Witch(const CVector3D& pos);
-	~Witch();
+	Swordsman(const CVector3D& pos);
+	~Swordsman();
 	void Update() override;
 	void Draw() override;
 	void StateIdle();
@@ -50,6 +50,5 @@ public:
 	/// <param name="range">ë™ÇËÇΩÇ¢ãóó£</param>
 	/// <returns></returns>
 	bool RangePlayer(const CVector3D& pos, const CVector3D& range);
-	CVector2D CalcScreenPos(bool grounded = false) const;
 	static TexAnimData _animData[];
 };

@@ -20,8 +20,8 @@ void Magic::Update(){
 }
 
 void Magic::Draw(){
-	m_img.SetSize(10, 50);
-	m_img.SetCenter(5, 25);
+	m_img.SetSize(20, 100);
+	m_img.SetCenter(10, 50);
 	m_img.SetPos(GetScreenPos(m_pos));
 	m_img.SetAng(m_ang);
 	m_img.Draw();
