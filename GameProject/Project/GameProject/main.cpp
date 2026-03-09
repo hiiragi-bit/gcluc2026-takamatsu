@@ -1,6 +1,7 @@
 #include "Base/ObjectBase.h"
 #include "Game/Player.h"
 //#include "Game/Swordsman.h"
+#include"Game/Map.h"
 #include "Game/Witch.h"
 #include "UI/HP.h"
 
@@ -110,6 +111,12 @@ void Init(void)
 	//’Ï
 	ADD_RESOURCE("Heart", CImage::CreateImage("UI/HP.png"));
 	ObjectBase::Add(new HP(CVector3D(50, 50, 0)));
+	ADD_RESOURCE("Ground", CImage::CreateImage("Map/Ground.png"));
+	ADD_RESOURCE("Sky", CImage::CreateImage("Map/Sky.png"));
+	ADD_RESOURCE("Object", CImage::CreateImage("Map/Object.png"));
+	ObjectBase::Add(new Map());
+
+
 
 
 
