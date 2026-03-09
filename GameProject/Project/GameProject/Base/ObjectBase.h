@@ -6,6 +6,9 @@
 enum {
     eType_Title,
     eType_Map,
+	eType_Box,
+    eType_Fence,
+	eType_Well,
     eType_Player,
     eType_Witch,
     eType_Swordsman,

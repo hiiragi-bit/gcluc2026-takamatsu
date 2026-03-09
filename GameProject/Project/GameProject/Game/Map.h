@@ -6,7 +6,6 @@ class Map : public ObjectBase {
 private:
     CImage m_sky;
 	CImage m_ground;
-    CImage m_object;
     int state;
    
     
