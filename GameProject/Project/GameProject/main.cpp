@@ -1,6 +1,7 @@
 #include "Base/ObjectBase.h"
 #include "Game/Player.h"
 #include "Game/Swordsman.h"
+#include"Game/MapObject.h"
 #include"Game/Map.h"
 #include "Game/Witch.h"
 #include "UI/HP.h"
@@ -113,8 +114,14 @@ void Init(void)
 	ObjectBase::Add(new HP(CVector3D(50, 50, 0)));
 	ADD_RESOURCE("Ground", CImage::CreateImage("Map/Ground.png"));
 	ADD_RESOURCE("Sky", CImage::CreateImage("Map/Sky.png"));
-	ADD_RESOURCE("Object", CImage::CreateImage("Map/Object.png"));
+	ADD_RESOURCE("Well", CImage::CreateImage("Map/well.png"));
+	ADD_RESOURCE("Fence", CImage::CreateImage("Map/fence.png"));
+	ADD_RESOURCE("Box", CImage::CreateImage("Map/box.png"));
 	ObjectBase::Add(new Map());
+	ObjectBase::Add(new MapObject(eType_Well));
+	ObjectBase::Add(new MapObject(eType_Fence));
+	ObjectBase::Add(new MapObject(eType_Box));
+
 
 
 

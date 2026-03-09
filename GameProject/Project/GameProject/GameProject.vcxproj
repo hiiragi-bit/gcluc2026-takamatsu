@@ -22,6 +22,7 @@
     <ClInclude Include="Base\ObjectBase.h" />
     <ClInclude Include="Game\Magic.h" />
     <ClInclude Include="Game\Map.h" />
+    <ClInclude Include="Game\MapObject.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\PlayerAttack.h" />
     <ClInclude Include="Game\Swordsman.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="Base\ObjectBase.cpp" />
     <ClCompile Include="Game\Magic.cpp" />
     <ClCompile Include="Game\Map.cpp" />
+    <ClCompile Include="Game\MapObject.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerAttack.cpp" />
     <ClCompile Include="Game\Swordsman.cpp" />
