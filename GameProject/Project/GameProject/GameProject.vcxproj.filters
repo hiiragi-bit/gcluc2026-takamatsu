@@ -17,7 +17,13 @@
     <ClInclude Include="Game\Magic.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Swordsman.h">
+    <ClInclude Include="Title\Clear.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\Title.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Map.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +44,13 @@
     <ClCompile Include="Game\Magic.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Swordsman.cpp">
+    <ClCompile Include="Title\Clear.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\Title.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Map.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>

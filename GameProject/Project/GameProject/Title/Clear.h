@@ -1,7 +1,7 @@
 #pragma once
-#include "Base/Base.h"
+#include "Base/ObjectBase.h"
 
-class Clear :public Base {
+class Clear :public ObjectBase {
 	//画像オブジェクト
 	CImage m_Clear;
 	//待ち時間

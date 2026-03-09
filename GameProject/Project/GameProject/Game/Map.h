@@ -4,12 +4,14 @@
 
 class Map : public ObjectBase {
 private:
-    CImage m_img;
+    CImage m_sky;
+	CImage m_ground;
+    CImage m_object;
     int state;
    
     
 public:
-    Map(int area);
+    Map();
     ~Map();
     void Update();
     void Draw();

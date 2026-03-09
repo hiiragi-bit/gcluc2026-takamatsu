@@ -83,7 +83,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//座標設定
 	m_pos_old = m_pos = pos;
 	//中心位置設定
-	m_img.SetCenter(90, 180);
+	m_img.SetCenter(180, 245);
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
@@ -252,7 +252,7 @@ void Player::Draw(){
 	//位置設定
 	m_img.SetPos(GetScreenPos(m_pos));
 	//表示サイズ設定
-	m_img.SetSize(180, 180);
+	m_img.SetSize(360, 360);
 	//反転設定
 	m_img.SetFlipH(m_flip);
 	//描画
