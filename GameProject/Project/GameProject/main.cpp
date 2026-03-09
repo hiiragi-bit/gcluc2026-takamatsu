@@ -1,6 +1,6 @@
 #include "Base/ObjectBase.h"
 #include "Game/Player.h"
-//#include "Game/Swordsman.h"
+#include "Game/Swordsman.h"
 #include"Game/Map.h"
 #include "Game/Witch.h"
 #include "UI/HP.h"
