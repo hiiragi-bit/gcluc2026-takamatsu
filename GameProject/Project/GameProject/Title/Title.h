@@ -1,7 +1,7 @@
 #pragma once
-#include "../Base/Base.h"
+#include "Base/ObjectBase.h"
 
-class Title :public Base {
+class Title :public ObjectBase {
 	//画像オブジェクト
 	CImage m_Title;
 	//待ち時間
