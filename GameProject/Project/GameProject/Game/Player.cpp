@@ -37,8 +37,10 @@ static TexAnim _death[] = {
 
 //吸収アニメーション
 static TexAnim _absorption[] = {
-	{28,5},
-	{29,5},
+	{35,5},
+	{36,5},
+	{37,5},
+	{38,5},
 };
 
 //走るアニメーション
@@ -104,7 +106,7 @@ Player::Player(const CVector3D& pos, bool flip)
 void Player::StateIdle()
 {
 	//移動量
-	const float move_speed = 6;
+	const float move_speed = 8;
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
@@ -158,6 +160,20 @@ void Player::StateIdle()
 		m_attack_no++;
 	}
 
+	//Xキーで攻撃
+	if (PUSH(CInput::eButton2))
+	{
+		//吸収状態へ移行
+		m_state = eState_Absorption;
+	}
+
+	//Cキーで攻撃
+	if (PUSH(CInput::eButton3))
+	{
+		//変身解除状態へ移行
+		m_state = eState_Detransform;
+	}
+
 	//SPACEキーでプレイヤーがジャンプ
 	if (m_is_ground && PUSH(CInput::eButton5))
 	{
@@ -187,6 +203,32 @@ void Player::StateAttack()
 	if (m_img.CheckAnimationEnd())
 	{
 		//通常状態へ移行
+		m_state = eState_Idle;
+	}
+}
+
+//吸収状態
+void Player::StateAbsorption()
+{
+	//吸収アニメーションへ変更
+	m_img.ChangeAnimation(eAnimAbsorption, false);
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd())
+	{
+		//通常状態へ移行
+		m_state = eState_Idle;
+	}
+}
+
+//変身解除状態
+void Player::StateDetransform()
+{
+	//変身解除アニメーションへ変更
+	m_img.ChangeAnimation(eAnimDetransform, false);
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd())
+	{
+		//通常状態へ
 		m_state = eState_Idle;
 	}
 }
@@ -223,6 +265,14 @@ void Player::Update()
 	//攻撃状態
 	case eState_Attack:
 		StateAttack();
+		break;
+	//吸収状態
+	case eState_Absorption:
+		StateAbsorption();
+		break;
+	//変身解除状態
+	case eState_Detransform:
+		StateDetransform();
 		break;
 	}
 	
