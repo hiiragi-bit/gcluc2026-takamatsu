@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerAttack.h"
 
 //待機アニメーション
 static TexAnim _idle[] = {
@@ -93,7 +94,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//着地フラグ
 	m_is_ground = true;
 	//当たり判定用矩形設定
-	m_rect = CRect(0, 0, 0, 0);
+	m_rect = CRect(-110, -190, 100, 0);
 	//攻撃番号
 	m_attack_no = rand();
 	//ダメージ番号
@@ -199,6 +200,16 @@ void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
 	m_img.ChangeAnimation(eAnimAttack, false);
+	//2番目のパターンなら
+	if (m_img.GetIndex() == 2)
+	{
+		if (m_flip)
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, -150, 0), m_flip, eType_Effect,
+				m_attack_no));
+		else
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(130, -150, 0), m_flip, eType_Effect,
+				m_attack_no));
+	}
 	//アニメーションが終了したら
 	if (m_img.CheckAnimationEnd())
 	{
@@ -308,7 +319,7 @@ void Player::Draw(){
 	//描画
 	m_img.Draw();
 	//当たり判定矩形
-	//DrawRect();
+	DrawRect();
 }
 
 //当たり判定

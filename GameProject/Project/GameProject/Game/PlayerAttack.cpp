@@ -8,8 +8,8 @@ PlayerAttack::PlayerAttack(const CVector3D& pos, bool flip, int type, int attack
 	m_img = COPY_RESOURCE("PlayerAttack", CImage);
 	m_flip = flip;
 	m_pos = pos;
-	//m_img.SetCenter();
-	m_rect = CRect();
+	m_img.SetCenter(90, 100);
+	m_rect = CRect(-100, -100, 100, 0);
 	//再生アニメーション設定(非ループ)
 	m_img.ChangeAnimation(0, false);
 	//攻撃番号
@@ -30,6 +30,7 @@ void PlayerAttack::Update()
 void PlayerAttack::Draw()
 {
 	m_img.SetPos(GetScreenPos(m_pos));
+	m_img.SetSize(180, 100);
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
 	DrawRect();
