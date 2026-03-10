@@ -1,5 +1,6 @@
 #include "Swordsman.h"
 #include "Player.h"
+#include "Slash.h"
 
 //TexAnim _idle[] = {
 //	{0,16},
@@ -38,11 +39,13 @@ Swordsman::Swordsman(const CVector3D& pos)
 	: ObjectBase(eType_Swordsman)
 	, m_state((int)EState::Idle)
 	, m_hp(3)
+	, m_attackNo(rand())
+	, m_damageNo(-1)
 	, m_invincibleCnt(0.0f)
 	, m_cooldownCnt(0.0f)
 	, m_isGround(true)
 	, m_flip(false)
-	, m_range(CVector3D(120, 120, 120)) {
+	, m_range(CVector3D(170, 170, 170)) {
 	m_img = COPY_RESOURCE("Swordsman", CImage);
 	m_pos = pos;
 	m_img.ChangeAnimation((int)EState::Idle);
@@ -64,6 +67,7 @@ void Swordsman::Update() {
 		break;
 	case (int)EState::Attack:
 		StateAttack();
+		m_attackNo++;
 		break;
 	case (int)EState::Death:
 		StateDeath();
@@ -83,8 +87,8 @@ void Swordsman::Update() {
 
 void Swordsman::Draw() {
 	m_img.SetRect(0, 0, 64, 64);
-	m_img.SetSize(512, 512);
-	m_img.SetCenter(256, 512 - 128);
+	m_img.SetSize(540, 540);
+	m_img.SetCenter(270, 540 - 135);
 	m_img.SetPos(GetScreenPos(m_pos));
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
@@ -131,7 +135,7 @@ void Swordsman::StateAttack() {
 		float ang = atan2(vec.x, vec.y);
 		//クールタイムが0なら攻撃
 		if (m_cooldownCnt == 0 && m_img.CheckAnimationEnd()) {
-			//攻撃::TODO
+			ObjectBase::Add(new Slash(m_pos, m_attackNo, m_flip));
 			m_cooldownCnt = SWORDSMAN_ATTACK_COOLDOWN_TIME;
 			m_state = (int)EState::Idle;
 		}

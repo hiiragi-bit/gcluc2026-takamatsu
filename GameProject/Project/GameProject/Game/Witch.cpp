@@ -84,8 +84,8 @@ void Witch::Update(){
 
 void Witch::Draw(){
 	m_img.SetRect(0, 0, 64, 64);
-	m_img.SetSize(512, 512);
-	m_img.SetCenter(256, 512 - 128);
+	m_img.SetSize(540, 540);
+	m_img.SetCenter(270, 540 - 135);
 	m_img.SetPos(GetScreenPos(m_pos));
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();

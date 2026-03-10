@@ -20,6 +20,8 @@ private:
 	CImage m_img;
 	int m_state;
 	int m_hp;
+	int m_attackNo;
+	int m_damageNo;
 	float m_invincibleCnt;		//–³“GŠÔƒJƒEƒ“ƒg
 	float m_cooldownCnt;		//UŒ‚ŠÔŠuƒJƒEƒ“ƒg
 	bool m_isGround;
@@ -34,6 +36,12 @@ public:
 	void StateDamage();
 	void StateAttack();
 	void StateDeath();
+	void SetDamageNo(int no) {
+		m_damageNo = no;
+	}
+	int GetDamageNo() const {
+		return m_damageNo;
+	}
 	void TakeDamage(int damage);
 	/// <summary>
 	/// –³“GŠÔ‚Ì”»’è
