@@ -5,13 +5,15 @@ class MapObject :public ObjectBase
 public:
 	
 public:
-	MapObject(char objectname);
-	
+	MapObject(const CVector3D&pos,char objectname,int objectnb);
+	//オブジェクトの種類に応じて画像を変更
+	void ChangeObject();
 
-	void Update() override;
-	void Draw() override;
+	void Update() ;
+	void Draw() ;
 private:
 	char m_objectname;
+	int  m_objectnb;
 	//CImage m_object;
 	//井戸
 	CImage m_well;
