@@ -45,16 +45,11 @@ static TexAnim _absorption[] = {
 };
 
 //走るアニメーション
-/*
 static TexAnim _run[] = {
-	{9,5},
-	{10,5},
-	{11,5},
-	{12,5},
-	{13,5},
-	//{14,5},
+	{42,5},
+	{43,5},
+	{44,5},
 };
-*/
 
 //ダメージアニメーション
 /*
@@ -72,7 +67,7 @@ TexAnimData Player::_anim_data[] = {
 	ANIMDATA(_jump),
 	ANIMDATA(_death),
 	ANIMDATA(_absorption),
-	//ANIMDATA(_run),
+	ANIMDATA(_run),
 	//ANIMDATA(_damage),
 };
 
@@ -94,7 +89,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//着地フラグ
 	m_is_ground = true;
 	//当たり判定用矩形設定
-	m_rect = CRect(-110, -190, 100, 0);
+	//m_rect = CRect(-110, -190, 100, 0);
 	//攻撃番号
 	m_attack_no = rand();
 	//ダメージ番号
@@ -184,14 +179,18 @@ void Player::StateIdle()
 	//ジャンプ中なら
 	if (!m_is_ground)
 	{
-		//上昇アニメーション
+		//ジャンプアニメーション
 		m_img.ChangeAnimation(eAnimJump, false);
 	}
 	//地面にいるなら
 	else
 	{
-		//待機アニメーション
-		m_img.ChangeAnimation(eAnimIdle);
+		if (move_flag)
+			//走るアニメーション
+			m_img.ChangeAnimation(eAnimRun);
+		else
+			//待機アニメーション
+			m_img.ChangeAnimation(eAnimIdle);
 	}
 }
 
@@ -204,10 +203,10 @@ void Player::StateAttack()
 	if (m_img.GetIndex() == 2)
 	{
 		if (m_flip)
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-250, -150, 0), m_flip, eType_Effect,
 				m_attack_no));
 		else
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(130, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(250, -150, 0), m_flip, eType_Effect,
 				m_attack_no));
 	}
 	//アニメーションが終了したら

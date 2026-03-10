@@ -24,4 +24,6 @@ public:
 	{
 		return m_attack_no;
 	}
+
+	static TexAnimData _anim_data[];
 };

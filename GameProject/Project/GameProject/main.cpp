@@ -6,6 +6,7 @@
 #include"Game/Map.h"
 #include "Game/Witch.h"
 #include "UI/HP.h"
+#include "Game/PlayerAttack.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -100,7 +101,7 @@ void Init(void)
 	ADD_RESOURCE("Player", CImage::CreateImage("Player/Player.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("Player", CImage::CreateImage("Player/PlayerWitch.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("Player", CImage::CreateImage("Player/PlayerSword.png", Player::_anim_data, 64, 64));
-	ADD_RESOURCE("PlayerAttack", CImage::CreateImage("Player/Attack.png"));
+	ADD_RESOURCE("PlayerAttack", CImage::CreateImage("Player/Attack.png", PlayerAttack::_anim_data, 64, 64));
 	ObjectBase::Add(new Player(CVector3D(100, 100, 0), false));
 
 
