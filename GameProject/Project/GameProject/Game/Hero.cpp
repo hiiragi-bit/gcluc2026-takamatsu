@@ -3,45 +3,42 @@
 #include "Player.h"
 #include "Slash.h"
 
-//TexAnim _idle[] = {
-//	{0,16},
-//	{1,16},
-//};
-//TexAnim _run[] = {
-//	{19,8},
-//	{20,8},
-//	{21,8},
-//	{22,8},
-//};
-//TexAnim _damage[] = {
-//	{38,16},
-//	{39,16},
-//};
-//TexAnim _attack_slash[] = {
-//	{57,8},
-//	{58,8},
-//	{59,8},
-//	{60,8},
-//};
-//TexAnim _attack_magic[] = {
-//	{57,8},
-//	{58,8},
-//	{59,8},
-//	{60,8},
-//};
-//TexAnim _death[] = {
-//	{76,8},
-//	{77,8},
-//	{78,8},
-//};
-//TexAnimData Hero::_animData[] = {
-//	ANIMDATA(_idle),
-//	ANIMDATA(_run),
-//	ANIMDATA(_damage),
-//	ANIMDATA(_attack_slash),
-//	ANIMDATA(_attack_magic),
-//	ANIMDATA(_death),
-//};
+TexAnim _hero_idle[] = {
+	{0,16},
+	{1,16},
+};
+TexAnim _hero_run[] = {
+	{19,8},
+	{20,8},
+};
+TexAnim _hero_damage[] = {
+	{38,16},
+	{39,16},
+};
+TexAnim _hero_attack_slash[] = {
+	{57,8},
+	{58,8},
+	{59,8},
+	{60,8},
+};
+TexAnim _hero_attack_magic[] = {
+	{76,8},
+	{77,8},
+	{78,8},
+};
+TexAnim _hero_death[] = {
+	{114,8},
+	{115,8},
+	{116,8},
+};
+TexAnimData Hero::_animData[] = {
+	ANIMDATA(_hero_idle),
+	ANIMDATA(_hero_run),
+	ANIMDATA(_hero_damage),
+	ANIMDATA(_hero_attack_slash),
+	ANIMDATA(_hero_attack_magic),
+	ANIMDATA(_hero_death),
+};
 
 Hero::Hero(const CVector3D& pos)
 	: ObjectBase(eType_Hero)
@@ -124,22 +121,20 @@ void Hero::StateIdle(){
 			bool b = RangePlayer(m_pos, m_range);
 			if (b) {
 				m_range = CVector3D(170, 170, 170);
-				//aŒ‚‚ÌUŒ‚”ÍˆÍ“à‚È‚çUŒ‚A”ÍˆÍŠO‚È‚ç‹ß‚Ã‚­
+				//aŒ‚‚ÌUŒ‚”ÍˆÍ“à‚È‚çUŒ‚
 				b = RangePlayer(m_pos, m_range);
-				if (b) {
-					m_state = (int)EState::AttackSlash;
-				}
-				else {
-					m_pos += vec;
-					move = true;
-				}
+				if (b) m_state = (int)EState::AttackSlash;
 			}
 			else m_state = (int)EState::AttackMagic;
 		}
 		//ƒN[ƒ‹ƒ_ƒEƒ“’†‚Í‹ß‚Ã‚­
 		else {
-			m_pos += vec;
-			move = true;
+			m_range = CVector3D(220, 220, 220);
+			bool b = RangePlayer(m_pos, m_range);
+			if (!b) {
+				m_pos += vec;
+				move = true;
+			}
 		}
 
 		(p->m_pos.x > m_pos.x) ? m_flip = true : m_flip = false;
