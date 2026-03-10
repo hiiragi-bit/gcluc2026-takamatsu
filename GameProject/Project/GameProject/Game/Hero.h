@@ -2,19 +2,20 @@
 #include "Base/ObjectBase.h"
 
 //à⁄ìÆë¨ìx
-#define SWORDSMAN_MOVE_SPEED 8
+#define HERO_MOVE_SPEED 10
 //çUåÇä‘äu
-#define SWORDSMAN_ATTACK_COOLDOWN_TIME 60.0f
+#define HERO_ATTACK_COOLDOWN_TIME 120.0f
 //ñ≥ìGéûä‘
-#define SWORDSMAN_INVINCIBLE_TIME 60.0f
+#define HERO_INVINCIBLE_TIME 60.0f
 
-class Swordsman :public ObjectBase {
+class Hero :public ObjectBase {
 private:
 	enum class EState {
 		Idle,
 		Run,
 		Damage,
-		Attack,
+		AttackSlash,
+		AttackMagic,
 		Death,
 	};
 	CImage m_img;
@@ -28,12 +29,13 @@ private:
 	bool m_flip;
 	CVector3D m_range;			//çUåÇîÕàÕ
 public:
-	Swordsman(const CVector3D& pos);
-	~Swordsman();
+	Hero(const CVector3D& pos);
+	~Hero();
 	void Update() override;
 	void Draw() override;
 	void StateIdle();
-	void StateAttack();
+	void StateAttackSlash();
+	void StateAttackMagic();
 	void StateDamage();
 	void StateDeath();
 	void SetDamageNo(int no) {

@@ -31,8 +31,8 @@ public:
 	void Update() override;
 	void Draw() override;
 	void StateIdle();
-	void StateDamage();
 	void StateAttack();
+	void StateDamage();
 	void StateDeath();
 	void TakeDamage(int damage);
 	/// <summary>
@@ -50,6 +50,5 @@ public:
 	/// <param name="range">‘ª‚è‚½‚¢‹——£</param>
 	/// <returns></returns>
 	bool RangePlayer(const CVector3D& pos, const CVector3D& range);
-	CVector2D CalcScreenPos(bool grounded = false) const;
 	static TexAnimData _animData[];
 };

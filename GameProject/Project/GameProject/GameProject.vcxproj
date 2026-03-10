@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\ObjectBase.h" />
+    <ClInclude Include="Game\Hero.h" />
     <ClInclude Include="Game\Magic.h" />
     <ClInclude Include="Game\Map.h" />
     <ClInclude Include="Game\MapObject.h" />
@@ -35,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\ObjectBase.cpp" />
+    <ClCompile Include="Game\Hero.cpp" />
     <ClCompile Include="Game\Magic.cpp" />
     <ClCompile Include="Game\Map.cpp" />
     <ClCompile Include="Game\MapObject.cpp" />

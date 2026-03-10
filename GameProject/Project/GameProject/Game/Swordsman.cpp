@@ -130,12 +130,9 @@ void Swordsman::StateIdle() {
 void Swordsman::StateAttack() {
 	m_img.ChangeAnimation((int)EState::Attack, false);
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
-		//攻撃方向
-		CVector3D vec = GetScreenPos(p->m_pos) - GetScreenPos(m_pos);
-		float ang = atan2(vec.x, vec.y);
 		//クールタイムが0なら攻撃
 		if (m_cooldownCnt == 0 && m_img.CheckAnimationEnd()) {
-			ObjectBase::Add(new Slash(m_pos, m_attackNo, m_flip));
+			ObjectBase::Add(new Slash(m_pos, m_attackNo, eType_Swordsman, m_flip));
 			m_cooldownCnt = SWORDSMAN_ATTACK_COOLDOWN_TIME;
 			m_state = (int)EState::Idle;
 		}
@@ -169,8 +166,7 @@ void Swordsman::TakeDamage(int damage) {
 	}
 }
 
-bool Swordsman::RangePlayer(const CVector3D& pos, const CVector3D& range)
-{
+bool Swordsman::RangePlayer(const CVector3D& pos, const CVector3D& range){
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		CVector3D playerPos = p->m_pos;
 		//自分とプレイヤーがrange以上ならfalse

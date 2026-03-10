@@ -12,6 +12,7 @@ enum {
     eType_Player,
     eType_Witch,
     eType_Swordsman,
+    eType_Hero,
     eType_Magic,
     eType_Effect,
     eType_Scene,

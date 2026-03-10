@@ -11,7 +11,7 @@ private:
 	int m_cnt;			//‰¼
 	bool m_flip;
 public:
-	Slash(const CVector3D& pos, int attack_no, bool flip);
+	Slash(const CVector3D& pos, int attack_no, int type, bool flip);
 	~Slash();
 	void Update() override;
 	void Draw() override;
