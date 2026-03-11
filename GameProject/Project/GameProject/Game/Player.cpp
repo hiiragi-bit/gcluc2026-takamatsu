@@ -79,7 +79,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//再生アニメーション設定
 	m_img.ChangeAnimation(0);
 	//座標設定
-	m_pos_old = m_pos = pos;
+	m_pos = pos;
 	//中心位置設定
 	m_img.SetCenter(270, 370);
 	//反転フラグ
@@ -95,7 +95,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//ダメージ番号
 	m_damage_no = -1;
 	//体力
-	//m_hp = 6;
+	m_hp = 6;
 }
 
 //待機状態
@@ -106,7 +106,7 @@ void Player::StateIdle()
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
-	const float jump_pow = 15;
+	const float jump_pow = 25;
 
 	//左移動
 	if (HOLD(CInput::eLeft))
@@ -156,14 +156,14 @@ void Player::StateIdle()
 		m_attack_no++;
 	}
 
-	//Xキーで攻撃
+	//Xキーで吸収
 	if (PUSH(CInput::eButton2))
 	{
 		//吸収状態へ移行
 		m_state = eState_Absorption;
 	}
 
-	//Cキーで攻撃
+	//Cキーで変身解除
 	if (PUSH(CInput::eButton3))
 	{
 		//変身解除状態へ移行
@@ -173,7 +173,7 @@ void Player::StateIdle()
 	//SPACEキーでプレイヤーがジャンプ
 	if (m_is_ground && PUSH(CInput::eButton5))
 	{
-		m_vec.y = -jump_pow;
+		m_vec.y = +jump_pow;
 		m_is_ground = false;
 	}
 	//ジャンプ中なら
@@ -263,8 +263,6 @@ void Player::StateDeath()
 
 void Player::Update()
 {
-	m_pos_old = m_pos;
-
 	//状態の切り替え
 	switch (m_state)
 	{
@@ -284,6 +282,14 @@ void Player::Update()
 	case eState_Detransform:
 		StateDetransform();
 		break;
+	//ダメージ状態
+	case eState_Damage:
+		StateDamage();
+		break;
+	//死亡状態
+	case eState_Death:
+		StateDeath();
+		break;
 	}
 	
 	//落ちていたら落下状態へ移行
@@ -293,15 +299,17 @@ void Player::Update()
 	m_vec.y += GRAVITY;
 	m_pos += m_vec;
 
-	//プレイヤーのy座標が1080以上なら
-	if (m_pos.y >= 1080)
+	//プレイヤーのy座標が0未満なら
+	if (m_pos.y < 0) 
 	{
-		//プレイヤーのy座標を1080にし、
+		//プレイヤーのy座標を0にし、
 		//接地判定をtrueにする
-		m_pos.y = 1080;
-		m_vec.y = 1080;
+		m_pos.y = 0;
+		m_vec.y = 0;
 		m_is_ground = true;
 	}
+	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
+	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 
 	//アニメーション更新
 	m_img.UpdateAnimation();
@@ -310,7 +318,7 @@ void Player::Update()
 //描画処理
 void Player::Draw(){
 	//位置設定
-	m_img.SetPos(GetScreenPos(m_pos));
+	m_img.SetPos(CalcScreenPos());
 	//表示サイズ設定
 	m_img.SetSize(540, 540);
 	//反転設定
