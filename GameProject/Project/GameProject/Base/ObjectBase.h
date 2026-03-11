@@ -1,5 +1,12 @@
 #pragma once
-#pragma once
+//Z軸の中心(0の場所)
+#define FIELD_CENTER_Z (SCREEN_HEIGHT * 0.75f)
+//Zの下限(奥)
+#define MIN_Z -230.0f
+//Zの上限(手前)
+#define MAX_Z 280.0f
+
+
 /// <summary>
 /// オブジェクトの種類
 /// </summary>
@@ -19,7 +26,7 @@ enum {
     eType_UI,
 };
 //重力加速度
-#define GRAVITY (9.8f/20)
+#define GRAVITY -1.0f
 
 /// <summary>
 /// ゲームオブジェクトの基底クラス
@@ -130,6 +137,13 @@ public:
     /// <param name="pos">キャラクターなどの座標</param>
     /// <returns>画面上での位置</returns>
     static CVector2D GetScreenPos(const CVector3D& pos);
+
+    /// <summary>
+    /// 3次元座標からスクリーン座標（2D）に変換
+    /// </summary>
+    /// <param name="grounded">trueならば、高さは考慮せず地面の位置を返す</param>
+    /// <returns>スクリーン座標</returns>
+    CVector2D CalcScreenPos(bool grounded = false) const;
 
     /// <summary>
     /// 矩形同士の判定

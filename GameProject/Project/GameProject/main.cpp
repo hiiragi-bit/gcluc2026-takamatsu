@@ -109,11 +109,11 @@ void Init(void)
 	//òaêÚ
 	ADD_RESOURCE("Witch", CImage::CreateImage("Enemy/Witch.png", Witch::_animData, 64, 64));
 	ADD_RESOURCE("Magic", CImage::CreateImage("Enemy/Bullet.png"));
-	ADD_RESOURCE("Swordsman", CImage::CreateImage("Enemy/Swordsman.png", Witch::_animData, 64, 64));
+	ADD_RESOURCE("Swordsman", CImage::CreateImage("Enemy/Swordsman.png", Swordsman::_animData, 64, 64));
 	ADD_RESOURCE("Hero", CImage::CreateImage("Enemy/Hero.png", Hero::_animData, 64, 64));
-	ObjectBase::Add(new Witch(CVector3D(500, 540, 0)));
-	ObjectBase::Add(new Swordsman(CVector3D(1000, 540, 0)));
-	ObjectBase::Add(new Hero(CVector3D(700, 540, 0)));
+	ObjectBase::Add(new Witch(CVector3D(500, 0, 0)));
+	ObjectBase::Add(new Swordsman(CVector3D(1000, 0, 0)));
+	ObjectBase::Add(new Hero(CVector3D(700, 0, 0)));
 
 
 	//íœ

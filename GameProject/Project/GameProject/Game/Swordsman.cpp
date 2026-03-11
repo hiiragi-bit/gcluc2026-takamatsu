@@ -2,38 +2,36 @@
 #include "Player.h"
 #include "Slash.h"
 
-//TexAnim _idle[] = {
-//	{0,16},
-//	{1,16},
-//};
-//TexAnim _run[] = {
-//	{19,8},
-//	{20,8},
-//	{21,8},
-//	{22,8},
-//};
-//TexAnim _damage[] = {
-//	{38,16},
-//	{39,16},
-//};
-//TexAnim _attack[] = {
-//	{57,8},
-//	{58,8},
-//	{59,8},
-//	{60,8},
-//};
-//TexAnim _death[] = {
-//	{76,8},
-//	{77,8},
-//	{78,8},
-//};
-//TexAnimData Swordsman::_animData[] = {
-//	ANIMDATA(_idle),
-//	ANIMDATA(_run),
-//	ANIMDATA(_damage),
-//	ANIMDATA(_attack),
-//	ANIMDATA(_death),
-//};
+TexAnim _swordsman_idle[] = {
+	{0,16},
+	{1,16},
+};
+TexAnim _swordsman_run[] = {
+	{19,8},
+	{20,8},
+};
+TexAnim _swordsman_damage[] = {
+	{38,16},
+	{39,16},
+};
+TexAnim _swordsman_attack[] = {
+	{57,8},
+	{58,8},
+	{59,8},
+	{60,8},
+};
+TexAnim _swordsman_death[] = {
+	{76,8},
+	{77,8},
+	{78,8},
+};
+TexAnimData Swordsman::_animData[] = {
+	ANIMDATA(_swordsman_idle),
+	ANIMDATA(_swordsman_run),
+	ANIMDATA(_swordsman_damage),
+	ANIMDATA(_swordsman_attack),
+	ANIMDATA(_swordsman_death),
+};
 
 Swordsman::Swordsman(const CVector3D& pos)
 	: ObjectBase(eType_Swordsman)
@@ -73,23 +71,25 @@ void Swordsman::Update() {
 		StateDeath();
 		break;
 	}
-	//落ちていたら落下状態へ移行
-	if (m_isGround && m_vec.y > GRAVITY * 4)
-		m_isGround = false;
+
+	m_pos += m_vec;
 	//重力による落下
 	m_vec.y += GRAVITY;
-	m_pos += m_vec;
-	if (m_pos.y >= SCREEN_HEIGHT) {
-		m_pos.y = SCREEN_HEIGHT;
+
+	if (m_pos.y <= 0) {
+		m_pos.y = 0;
+		m_vec.y = 0;
 		m_isGround = true;
 	}
+	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
+	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 }
 
 void Swordsman::Draw() {
 	m_img.SetRect(0, 0, 64, 64);
 	m_img.SetSize(540, 540);
 	m_img.SetCenter(270, 540 - 135);
-	m_img.SetPos(GetScreenPos(m_pos));
+	m_img.SetPos(CalcScreenPos());
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
 	//DrawRect();
@@ -103,21 +103,21 @@ void Swordsman::StateIdle() {
 
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		//プレイヤーのいる方向へ移動
-		CVector3D pos = GetScreenPos(p->m_pos) - GetScreenPos(m_pos);
+		CVector3D pos = p->m_pos - m_pos;
+		//TODO
+		pos.y = 0;
 		pos.Normalize();
 		CVector3D vec = pos * SWORDSMAN_MOVE_SPEED;
+		bool b = RangePlayer(m_pos, m_range);
 
-		//クールタイム中でなければ
-		if (m_cooldownCnt == 0) {
-			//プレイヤーが攻撃範囲内なら攻撃、範囲外なら近づく
-			bool b = RangePlayer(m_pos, m_range);
-			if (b) {
-				m_state = (int)EState::Attack;
-			}
-			else {
-				m_pos += vec;
-				move = true;
-			}
+		//クールタイム中でなく、プレイヤーが攻撃範囲内なら攻撃
+		if (m_cooldownCnt == 0 && b) {
+			m_state = (int)EState::Attack;
+		}
+		//クールダウン中かつ範囲外なら近づく
+		else {
+			m_pos += vec;
+			move = true;
 		}
 
 		(p->m_pos.x > m_pos.x) ? m_flip = true : m_flip = false;
@@ -171,7 +171,8 @@ bool Swordsman::RangePlayer(const CVector3D& pos, const CVector3D& range){
 		CVector3D playerPos = p->m_pos;
 		//自分とプレイヤーがrange以上ならfalse
 		if (abs(pos.x - playerPos.x) > range.x) return false;
-		if (abs(pos.y - playerPos.y) > range.y) return false;
+		//TODO
+		//if (abs(pos.y - playerPos.y) > range.y) return false;
 		if (abs(pos.z - playerPos.z) > range.z) return false;
 
 		return true;

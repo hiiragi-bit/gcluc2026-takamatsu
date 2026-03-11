@@ -2,7 +2,7 @@
 #include "Base/ObjectBase.h"
 
 //ˆÚ“®‘¬“x
-#define HERO_MOVE_SPEED 10
+#define HERO_MOVE_SPEED 6
 //UŒ‚ŠÔŠu
 #define HERO_ATTACK_COOLDOWN_TIME 120.0f
 //–³“GŠÔ

@@ -81,23 +81,25 @@ void Hero::Update(){
 		StateDeath();
 		break;
 	}
-	//落ちていたら落下状態へ移行
-	if (m_isGround && m_vec.y > GRAVITY * 4)
-		m_isGround = false;
+
+	m_pos += m_vec;
 	//重力による落下
 	m_vec.y += GRAVITY;
-	m_pos += m_vec;
-	if (m_pos.y >= SCREEN_HEIGHT) {
-		m_pos.y = SCREEN_HEIGHT;
+
+	if (m_pos.y <= 0) {
+		m_pos.y = 0;
+		m_vec.y = 0;
 		m_isGround = true;
 	}
+	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
+	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 }
 
 void Hero::Draw(){
 	m_img.SetRect(0, 0, 64, 64);
 	m_img.SetSize(540, 540);
 	m_img.SetCenter(270, 540 - 135);
-	m_img.SetPos(GetScreenPos(m_pos));
+	m_img.SetPos(CalcScreenPos());
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
 	//DrawRect();
@@ -111,7 +113,8 @@ void Hero::StateIdle(){
 
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		//プレイヤーのいる方向へ移動
-		CVector3D pos = GetScreenPos(p->m_pos) - GetScreenPos(m_pos);
+		CVector3D pos = p->m_pos - m_pos;
+		pos.y = 0;
 		pos.Normalize();
 		CVector3D vec = pos * HERO_MOVE_SPEED;
 
@@ -160,14 +163,15 @@ void Hero::StateAttackMagic(){
 	m_img.ChangeAnimation((int)EState::AttackMagic, false);
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		//攻撃方向
-		CVector3D vec = GetScreenPos(p->m_pos) - GetScreenPos(m_pos);
-		float ang = atan2(vec.x, vec.y);
+		CVector3D vec = p->m_pos - m_pos;
+		float ang = atan2(vec.z, vec.x);
 		//クールタイムが0なら攻撃
 		if (m_cooldownCnt == 0 && m_img.CheckAnimationEnd()) {
 			//位置調整
 			float posx = 0;
-			float posy = -80;
+			float posy = 80;
 			(!m_flip) ? posx = -40 : posx = 40;
+			//TODO
 			ObjectBase::Add(new Magic(CVector3D(m_pos.x + posx, m_pos.y + posy, m_pos.z), ang));
 			m_cooldownCnt = HERO_ATTACK_COOLDOWN_TIME;
 			m_state = (int)EState::Idle;
@@ -207,7 +211,8 @@ bool Hero::RangePlayer(const CVector3D& pos, const CVector3D& range){
 		CVector3D playerPos = p->m_pos;
 		//自分とプレイヤーがrange以上ならfalse(範囲外)
 		if (abs(pos.x - playerPos.x) > range.x) return false;
-		if (abs(pos.y - playerPos.y) > range.y) return false;
+		//TODO
+		//if (abs(pos.y - playerPos.y) > range.y) return false;
 		if (abs(pos.z - playerPos.z) > range.z) return false;
 
 		return true;

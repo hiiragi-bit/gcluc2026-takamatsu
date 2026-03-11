@@ -138,6 +138,30 @@ CVector2D ObjectBase::GetScreenPos(const CVector3D& pos)
 {
     return CVector2D(pos.x - m_scroll.x, pos.y - m_scroll.y);
 }
+
+CVector2D ObjectBase::CalcScreenPos(bool grounded) const
+{
+    CVector2D ret;
+
+    // X座標はそのまま設定
+    ret.x = m_pos.x;
+    // 通常座標を求める場合
+    if (!grounded)
+    {
+        // Y座標は、3次元座標のY（高さ）とZ（奥行）を合わせる
+        float posZ = FIELD_CENTER_Z + m_pos.z;
+        ret.y = -m_pos.y + posZ;
+    }
+    // 高さを考慮しない地面の位置を求める場合
+    else
+    {
+        // Y座標は、3次元座標のZ（奥行）のみ反映する
+        ret.y = FIELD_CENTER_Z + m_pos.z;
+    }
+
+    return ret;
+}
+
 void ObjectBase::DrawRect()
 {
     //デバッグ用　矩形の表示
