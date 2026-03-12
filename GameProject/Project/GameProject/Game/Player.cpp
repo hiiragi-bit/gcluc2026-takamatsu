@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayerAttack.h"
+#include "Shadow.h"
 
 //待機アニメーション
 static TexAnim _idle[] = {
@@ -52,11 +53,10 @@ static TexAnim _run[] = {
 };
 
 //ダメージアニメーション
-/*
 static TexAnim _damage[] = {
-	
+	{28,5},
+	{29,5},
 };
-*/
 
 TexAnimData Player::_anim_data[] = {
 	ANIMDATA(_idle),
@@ -66,7 +66,7 @@ TexAnimData Player::_anim_data[] = {
 	ANIMDATA(_death),
 	ANIMDATA(_absorption),
 	ANIMDATA(_run),
-	//ANIMDATA(_damage),
+	ANIMDATA(_damage),
 };
 
 Player::Player(const CVector3D& pos, bool flip)
@@ -93,7 +93,8 @@ Player::Player(const CVector3D& pos, bool flip)
 	//ダメージ番号
 	m_damage_no = -1;
 	//体力
-	m_hp = 360;
+	m_hp = 6;
+	ObjectBase::Add(new Shadow(m_pos, eType_Player));
 }
 
 //待機状態
@@ -244,17 +245,14 @@ void Player::StateDetransform()
 //ダメージ状態
 void Player::StateDamage()
 {
-	/*
 	//ダメージアニメーションへ変更
 	m_img.ChangeAnimation(eAnimDamage, false);
 	//アニメーションが終了したら
 	if (m_img.CheckAnimationEnd())
 	{
-		
-	}
-	*/
-	//通常状態へ
+		//通常状態へ
 	m_state = eState_Idle;
+	}
 }
 
 //死亡状態
