@@ -26,6 +26,7 @@
     <ClInclude Include="Game\MapObject.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\PlayerAttack.h" />
+    <ClInclude Include="Game\Shadow.h" />
     <ClInclude Include="Game\Slash.h" />
     <ClInclude Include="Game\Swordsman.h" />
     <ClInclude Include="Game\Witch.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="Game\MapObject.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerAttack.cpp" />
+    <ClCompile Include="Game\Shadow.cpp" />
     <ClCompile Include="Game\Slash.cpp" />
     <ClCompile Include="Game\Swordsman.cpp" />
     <ClCompile Include="Game\Witch.cpp" />

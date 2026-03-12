@@ -1,5 +1,6 @@
 #include "Swordsman.h"
 #include "Player.h"
+#include "Shadow.h"
 #include "Slash.h"
 
 TexAnim _swordsman_idle[] = {
@@ -48,6 +49,7 @@ Swordsman::Swordsman(const CVector3D& pos)
 	m_pos = pos;
 	m_img.ChangeAnimation((int)EState::Idle);
 	m_rect = CRect(-48, -112, 48, 0);
+	ObjectBase::Add(new Shadow(m_pos, eType_Swordsman));
 }
 
 Swordsman::~Swordsman() {

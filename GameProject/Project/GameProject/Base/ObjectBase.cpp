@@ -1,7 +1,8 @@
 #include "ObjectBase.h"
 std::list<ObjectBase*> ObjectBase::m_list;
+std::list<ObjectBase*> ObjectBase::m_obj_list;
 CVector3D ObjectBase::m_scroll(0, 0, 0);
-ObjectBase::ObjectBase(int type) : m_type(type), m_pos(0, 0, 0), m_rad(0), m_kill(false)
+ObjectBase::ObjectBase(int type, int sort_order) : m_type(type), m_sort_order(sort_order), m_pos(0, 0, 0), m_rad(0), m_kill(false)
 {
 
 }
@@ -12,6 +13,10 @@ ObjectBase::~ObjectBase()
 }
 
 void ObjectBase::Update()
+{
+}
+
+void ObjectBase::PreDraw()
 {
 }
 
@@ -57,6 +62,26 @@ void ObjectBase::UpdateAll()
 
 void ObjectBase::DrawAll()
 {
+    //オブジェクトリストの中身を奥行きの座標が大きい順に並べる
+    m_obj_list.sort(
+        [](const ObjectBase* task0, const ObjectBase* task1) {
+            const ObjectBase* obj0 = dynamic_cast<const ObjectBase*>(task0);
+            const ObjectBase* obj1 = dynamic_cast<const ObjectBase*>(task1);
+            return obj0->m_pos.z < obj1->m_pos.z;
+        }
+    );
+
+    //並び変えたオブジェクトリストの先頭から順番に
+    //sort_orderの値を設定することでタスクリストの中のオブジェクトの順番にも反映
+    int sort_order = 0;
+    for (ObjectBase* obj : m_obj_list) {
+        obj->SetSortOrder(sort_order);
+        sort_order++;
+    }
+    //リスト内全ての要素の前描画
+    for (auto& b : m_list) {
+        b->PreDraw();
+    }
     //リスト内全ての要素の描画
     for (auto& b : m_list) {
         b->Draw();
@@ -78,23 +103,82 @@ void ObjectBase::CheckKillAll()
             it++;
         }
     }
+
+    it = m_obj_list.begin();
+    last = m_obj_list.end();
+    while (it != last) {
+        if ((*it)->m_kill) {
+            //オブジェクトリストから除外、次の要素のポインタを受け取る
+            it = m_obj_list.erase(it);
+        }
+        else {
+            //次へ
+            it++;
+        }
+    }
 }
 
 
-void ObjectBase::Add(ObjectBase* b)
+void ObjectBase::Add(ObjectBase* b, bool sort)
 {
-    //Type順によるソート
+    //並び替え時の追加処理でなければ
+    if (!sort) {
+        //追加されるタスクがオブジェクトなら
+        //オブジェクトリストにも登録
+        if (eType_Box <= b->m_type && b->m_type <= eType_Magic) {
+            m_obj_list.push_back(b);
+        }
+    }
+
     auto itr = m_list.begin();
     while (itr != m_list.end()) {
-        if ((*itr)->m_type > b->m_type) {
+        if ((*itr)->m_sort_order > b->m_sort_order) {
             m_list.insert(itr, b);
             return;
         }
+        //Typeが同じ場合は、SortOrder順でソート
+        else if (b->m_sort_order == (*itr)->m_sort_order) {
+            if (b->m_type < (*itr)->m_type) {
+                m_list.insert(itr, b);
+                return;
+            }
+        }
         itr++;
     }
+
+    //Type順によるソート
+    //auto itr = m_list.begin();
+    //while (itr != m_list.end()) {
+    //    if ((*itr)->m_type > b->m_type) {
+    //        m_list.insert(itr, b);
+    //        return;
+    //    }
+    //    //Typeが同じ場合は、SortOrder順でソート
+    //    else if (b->m_type == (*itr)->m_type) {
+    //        if (b->m_sort_order < (*itr)->m_sort_order) {
+    //            m_list.insert(itr, b);
+    //            return;
+    //        }
+    //    }
+    //    itr++;
+    //}
     //リストの末尾へ追加
     m_list.push_back(b);
 }
+
+void ObjectBase::Remove(ObjectBase* b, bool sort)
+{
+    //並び替え時でなければ
+    if (!sort) {
+        //taskがオブジェクトならオブジェクトリストからも取り除く
+        if (eType_Box <= b->m_type && b->m_type <= eType_Magic) {
+            m_obj_list.remove(b);
+        }
+    }
+    //オブジェクトをリストから除外
+    m_list.remove(b);
+}
+
 void ObjectBase::KillAll()
 {
     for (auto& b : m_list) {
@@ -132,6 +216,17 @@ std::list<ObjectBase*> ObjectBase::FindObjects(int type)
             ret.push_back(b);
     }
     return ret;
+}
+
+void ObjectBase::SetSortOrder(int order)
+{
+    //優先度内の順番が同じなら処理しない
+    if (m_sort_order == order) return;
+    //優先度内の順番を設定
+    m_sort_order = order;
+    //一度取り除いて再度追加することで並び変える
+    Remove(this, true);
+    Add(this, true);
 }
 
 CVector2D ObjectBase::GetScreenPos(const CVector3D& pos)

@@ -13,6 +13,7 @@
 enum {
     eType_Title,
     eType_Map,
+    eType_Shadow,
 	eType_Box,
     eType_Fence,
 	eType_Well,
@@ -35,6 +36,8 @@ class ObjectBase {
 public:
     //オブジェクトの種類
     int m_type;
+    //オブジェクトの優先度
+    int m_sort_order;
     //座標データ
     CVector3D m_pos;
     //過去の位置
@@ -51,13 +54,14 @@ public:
     CRect   m_rect;
     bool m_kill;
     static std::list<ObjectBase*> m_list;
+    static std::list<ObjectBase*> m_obj_list;
     //スクロール値
     static CVector3D m_scroll;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ObjectBase(int type);
+    ObjectBase(int type, int sort_order = 0);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -66,6 +70,10 @@ public:
     /// 更新処理
     /// </summary>
     virtual void Update();
+    /// <summary>
+   /// 前描画処理
+   /// </summary>
+    virtual void PreDraw();
     /// <summary>
     /// 描画処理
     /// </summary>
@@ -106,7 +114,12 @@ public:
     /// オブジェクトをリストへ追加
     /// </summary>
     /// <param name="b">追加オブジェクト</param>
-    static void Add(ObjectBase* b);
+    static void Add(ObjectBase* b, bool sort = false);
+    /// <summary>
+    /// オブジェクトをリストから除外
+    /// </summary>
+    /// <param name="b">除外オブジェクト</param>
+    static void Remove(ObjectBase* b, bool sort = false);
 
     /// <summary>
     /// 全オブジェクトの削除
@@ -132,12 +145,17 @@ public:
     static std::list<ObjectBase*> FindObjects(int type);
 
     /// <summary>
+    /// オブジェクトの優先度を設定
+    /// </summary>
+    /// <param name="order">設定する優先度</param>
+    void SetSortOrder(int order);
+
+    /// <summary>
     /// 画面内での位置を取得
     /// </summary>
     /// <param name="pos">キャラクターなどの座標</param>
     /// <returns>画面上での位置</returns>
     static CVector2D GetScreenPos(const CVector3D& pos);
-
     /// <summary>
     /// 3次元座標からスクリーン座標（2D）に変換
     /// </summary>
