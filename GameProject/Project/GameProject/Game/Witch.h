@@ -2,7 +2,7 @@
 #include "Base/ObjectBase.h"
 
 //ˆÚ“®‘¬“x
-#define WITCH_MOVE_SPEED 6
+#define WITCH_MOVE_SPEED 5
 //UŒ‚ŠÔŠu
 #define WITCH_ATTACK_COOLDOWN_TIME 120.0f
 //–³“GŠÔ
