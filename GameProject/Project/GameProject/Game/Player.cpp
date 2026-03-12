@@ -54,9 +54,7 @@ static TexAnim _run[] = {
 //ダメージアニメーション
 /*
 static TexAnim _damage[] = {
-	{49,5},
-	{50,5},
-	{51,5},
+	
 };
 */
 
@@ -95,7 +93,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	//ダメージ番号
 	m_damage_no = -1;
 	//体力
-	m_hp = 6;
+	m_hp = 360;
 }
 
 //待機状態
@@ -246,6 +244,17 @@ void Player::StateDetransform()
 //ダメージ状態
 void Player::StateDamage()
 {
+	/*
+	//ダメージアニメーションへ変更
+	m_img.ChangeAnimation(eAnimDamage, false);
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd())
+	{
+		
+	}
+	*/
+	//通常状態へ
+	m_state = eState_Idle;
 }
 
 //死亡状態

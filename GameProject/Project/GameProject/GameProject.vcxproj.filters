@@ -32,17 +32,17 @@
     <ClInclude Include="Game\PlayerAttack.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\MapObject.h" />
     <ClInclude Include="Game\Slash.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Hero.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Shadow.h">
+<ClInclude Include="Game\MapObject.h">
       <Filter>Game</Filter>
-    </ClInclude>
-  </ItemGroup>
+    </ClInclude> <ClInclude Include="Game\Shadow.h">
+      <Filter>Game</Filter>
+    </ClInclude>  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Base\ObjectBase.cpp">
@@ -75,17 +75,17 @@
     <ClCompile Include="Game\PlayerAttack.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\MapObject.cpp" />
     <ClCompile Include="Game\Slash.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Hero.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Shadow.cpp">
+<ClCompile Include="Game\MapObject.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-  </ItemGroup>
+    </ClCompile> <ClCompile Include="Game\Shadow.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>  </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
       <UniqueIdentifier>{b98f1ce6-6d31-43e3-9376-3ca0363bbb4b}</UniqueIdentifier>
