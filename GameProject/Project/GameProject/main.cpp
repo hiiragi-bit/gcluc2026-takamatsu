@@ -127,7 +127,7 @@ void Init(void)
 	ObjectBase::Add(new Map());
 	ObjectBase::Add(new MapObject(CVector3D(900,750,0),eType_Well,1));
 	ObjectBase::Add(new MapObject(CVector3D(200,600,0),eType_Fence,3));
-	ObjectBase::Add(new MapObject(CVector3D(600,500,50),eType_Box,4));
+	ObjectBase::Add(new MapObject(CVector3D(600,500,3),eType_Box,4));
 
 
 
