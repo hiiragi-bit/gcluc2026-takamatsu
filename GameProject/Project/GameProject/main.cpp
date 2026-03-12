@@ -113,7 +113,7 @@ void Init(void)
 	ADD_RESOURCE("Hero", CImage::CreateImage("Enemy/Hero.png", Hero::_animData, 64, 64));
 	ObjectBase::Add(new Witch(CVector3D(500, 0, 0)));
 	ObjectBase::Add(new Swordsman(CVector3D(1000, 0, 0)));
-	//ObjectBase::Add(new Hero(CVector3D(700, 0, 0)));
+	ObjectBase::Add(new Hero(CVector3D(700, 0, 0)));
 
 
 	//’Ï
