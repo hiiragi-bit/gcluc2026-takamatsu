@@ -43,7 +43,7 @@ Swordsman::Swordsman(const CVector3D& pos)
 	, m_cooldownCnt(0.0f)
 	, m_isGround(true)
 	, m_flip(false)
-	, m_range(CVector3D(170, 170, 170)) {
+	, m_range(CVector3D(170, 10, 85)) {
 	m_img = COPY_RESOURCE("Swordsman", CImage);
 	m_pos = pos;
 	m_img.ChangeAnimation((int)EState::Idle);
@@ -55,21 +55,23 @@ Swordsman::~Swordsman() {
 }
 
 void Swordsman::Update() {
-	m_img.UpdateAnimation();
-	switch (m_state) {
-	case (int)EState::Idle:
-		StateIdle();
-		break;
-	case (int)EState::Damage:
-		StateDamage();
-		break;
-	case (int)EState::Attack:
-		StateAttack();
-		m_attackNo++;
-		break;
-	case (int)EState::Death:
-		StateDeath();
-		break;
+	if (ObjectBase::FindObject(eType_Player)) {
+		m_img.UpdateAnimation();
+		switch (m_state) {
+		case (int)EState::Idle:
+			StateIdle();
+			break;
+		case (int)EState::Damage:
+			StateDamage();
+			break;
+		case (int)EState::Attack:
+			StateAttack();
+			m_attackNo++;
+			break;
+		case (int)EState::Death:
+			StateDeath();
+			break;
+		}
 	}
 
 	m_pos += m_vec;
@@ -104,8 +106,6 @@ void Swordsman::StateIdle() {
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		//プレイヤーのいる方向へ移動
 		CVector3D pos = p->m_pos - m_pos;
-		//TODO
-		pos.y = 0;
 		pos.Normalize();
 		CVector3D vec = pos * SWORDSMAN_MOVE_SPEED;
 		bool b = RangePlayer(m_pos, m_range);
@@ -116,8 +116,10 @@ void Swordsman::StateIdle() {
 		}
 		//クールダウン中かつ範囲外なら近づく
 		else {
-			m_pos += vec;
-			move = true;
+			if (!b) {
+				m_pos += vec;
+				move = true;
+			}
 		}
 
 		(p->m_pos.x > m_pos.x) ? m_flip = true : m_flip = false;
@@ -132,7 +134,7 @@ void Swordsman::StateAttack() {
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		//クールタイムが0なら攻撃
 		if (m_cooldownCnt == 0 && m_img.CheckAnimationEnd()) {
-			ObjectBase::Add(new Slash(m_pos, m_attackNo, eType_Swordsman, m_flip));
+			ObjectBase::Add(new Slash(m_pos, m_attackNo, m_range));
 			m_cooldownCnt = SWORDSMAN_ATTACK_COOLDOWN_TIME;
 			m_state = (int)EState::Idle;
 		}
@@ -171,8 +173,7 @@ bool Swordsman::RangePlayer(const CVector3D& pos, const CVector3D& range){
 		CVector3D playerPos = p->m_pos;
 		//自分とプレイヤーがrange以上ならfalse
 		if (abs(pos.x - playerPos.x) > range.x) return false;
-		//TODO
-		//if (abs(pos.y - playerPos.y) > range.y) return false;
+		if (abs(pos.y - playerPos.y) > range.y) return false;
 		if (abs(pos.z - playerPos.z) > range.z) return false;
 
 		return true;
