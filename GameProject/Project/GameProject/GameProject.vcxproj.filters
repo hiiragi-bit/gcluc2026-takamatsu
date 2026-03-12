@@ -32,11 +32,13 @@
     <ClInclude Include="Game\PlayerAttack.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\MapObject.h" />
     <ClInclude Include="Game\Slash.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Hero.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MapObject.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -72,11 +74,13 @@
     <ClCompile Include="Game\PlayerAttack.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\MapObject.cpp" />
     <ClCompile Include="Game\Slash.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Hero.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MapObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
