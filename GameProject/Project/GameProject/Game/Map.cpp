@@ -26,7 +26,7 @@ void Map::Update()
 {
    
 }
-void Map::Draw()
+void Map::PreDraw()
 {
  
 	m_sky.SetSize(1920, 1080); 

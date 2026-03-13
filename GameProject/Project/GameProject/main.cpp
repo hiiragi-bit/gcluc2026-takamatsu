@@ -1,4 +1,5 @@
 #include "Base/ObjectBase.h"
+#include "Game/Game.h"
 #include "Game/Hero.h"
 #include "Game/Player.h"
 #include "Game/Swordsman.h"
@@ -7,7 +8,6 @@
 #include "Game/Witch.h"
 #include "UI/HP.h"
 #include "Game/PlayerAttack.h"
-#include "Base/EnemyManager.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -116,7 +116,7 @@ void Init(void)
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
 	ADD_RESOURCE("Timer", CImage::CreateImage("Title/Timer.png"));
-	EnemyManager::Instance();
+	ObjectBase::Add(new Game());
 
 	//’Ï
 	ADD_RESOURCE("Heart", CImage::CreateImage("UI/HP.png"));

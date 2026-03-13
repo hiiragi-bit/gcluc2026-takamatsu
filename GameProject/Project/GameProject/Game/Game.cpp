@@ -1,3 +1,4 @@
+#include "Base/EnemyManager.h"
 #include "Game.h"
 #include "Title/Clear.h"
 
@@ -8,7 +9,7 @@ bool Game::m_game = false;
 Game::Game()
 	: ObjectBase(eType_Scene)
 	, m_cnt(0) {
-
+	EnemyManager::Instance();
 }
 
 void Game::Update(){

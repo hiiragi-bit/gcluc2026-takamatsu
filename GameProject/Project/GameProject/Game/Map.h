@@ -13,7 +13,7 @@ public:
     Map();
     ~Map();
     void Update();
-    void Draw();
+    void PreDraw();
   
     
   
