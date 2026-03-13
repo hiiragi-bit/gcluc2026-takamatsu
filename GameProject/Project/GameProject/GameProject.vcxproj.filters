@@ -38,11 +38,22 @@
     <ClInclude Include="Game\Hero.h">
       <Filter>Game</Filter>
     </ClInclude>
-<ClInclude Include="Game\MapObject.h">
+    <ClInclude Include="Game\MapObject.h">
       <Filter>Game</Filter>
-    </ClInclude> <ClInclude Include="Game\Shadow.h">
+    </ClInclude>
+    <ClInclude Include="Game\Shadow.h">
       <Filter>Game</Filter>
-    </ClInclude>  </ItemGroup>
+    </ClInclude>
+    <ClInclude Include="Base\EnemyBase.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\EnemyManager.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Base\ObjectBase.cpp">
@@ -81,11 +92,22 @@
     <ClCompile Include="Game\Hero.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-<ClCompile Include="Game\MapObject.cpp">
+    <ClCompile Include="Game\MapObject.cpp">
       <Filter>Game</Filter>
-    </ClCompile> <ClCompile Include="Game\Shadow.cpp">
+    </ClCompile>
+    <ClCompile Include="Game\Shadow.cpp">
       <Filter>Game</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="Base\EnemyBase.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\EnemyManager.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
       <UniqueIdentifier>{b98f1ce6-6d31-43e3-9376-3ca0363bbb4b}</UniqueIdentifier>

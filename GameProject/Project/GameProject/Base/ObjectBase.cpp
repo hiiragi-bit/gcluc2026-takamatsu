@@ -146,22 +146,6 @@ void ObjectBase::Add(ObjectBase* b, bool sort)
         itr++;
     }
 
-    //Type順によるソート
-    //auto itr = m_list.begin();
-    //while (itr != m_list.end()) {
-    //    if ((*itr)->m_type > b->m_type) {
-    //        m_list.insert(itr, b);
-    //        return;
-    //    }
-    //    //Typeが同じ場合は、SortOrder順でソート
-    //    else if (b->m_type == (*itr)->m_type) {
-    //        if (b->m_sort_order < (*itr)->m_sort_order) {
-    //            m_list.insert(itr, b);
-    //            return;
-    //        }
-    //    }
-    //    itr++;
-    //}
     //リストの末尾へ追加
     m_list.push_back(b);
 }

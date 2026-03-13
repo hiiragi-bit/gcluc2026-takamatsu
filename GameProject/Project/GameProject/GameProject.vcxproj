@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base\EnemyBase.h" />
+    <ClInclude Include="Base\EnemyManager.h" />
     <ClInclude Include="Base\ObjectBase.h" />
+    <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Hero.h" />
     <ClInclude Include="Game\Magic.h" />
     <ClInclude Include="Game\Map.h" />
@@ -36,7 +39,10 @@
     <ClInclude Include="UI\HP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Base\EnemyBase.cpp" />
+    <ClCompile Include="Base\EnemyManager.cpp" />
     <ClCompile Include="Base\ObjectBase.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\Hero.cpp" />
     <ClCompile Include="Game\Magic.cpp" />
     <ClCompile Include="Game\Map.cpp" />

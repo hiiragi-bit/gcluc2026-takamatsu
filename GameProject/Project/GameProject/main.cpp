@@ -7,6 +7,7 @@
 #include "Game/Witch.h"
 #include "UI/HP.h"
 #include "Game/PlayerAttack.h"
+#include "Base/EnemyManager.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -113,10 +114,9 @@ void Init(void)
 	ADD_RESOURCE("Swordsman", CImage::CreateImage("Enemy/Swordsman.png", Swordsman::_animData, 64, 64));
 	ADD_RESOURCE("Hero", CImage::CreateImage("Enemy/Hero.png", Hero::_animData, 64, 64));
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
-	ObjectBase::Add(new Witch(CVector3D(500, 0, 0)));
-	ObjectBase::Add(new Swordsman(CVector3D(1000, 0, 0)));
-	ObjectBase::Add(new Hero(CVector3D(700, 0, 0)));
-
+	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
+	ADD_RESOURCE("Timer", CImage::CreateImage("Title/Timer.png"));
+	EnemyManager::Instance();
 
 	//’Ï
 	ADD_RESOURCE("Heart", CImage::CreateImage("UI/HP.png"));

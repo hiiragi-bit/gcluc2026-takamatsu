@@ -35,18 +35,11 @@ TexAnimData Swordsman::_animData[] = {
 };
 
 Swordsman::Swordsman(const CVector3D& pos)
-	: ObjectBase(eType_Swordsman)
-	, m_state((int)EState::Idle)
-	, m_hp(3)
-	, m_attackNo(rand())
-	, m_damageNo(-1)
-	, m_invincibleCnt(0.0f)
-	, m_cooldownCnt(0.0f)
-	, m_isGround(true)
-	, m_flip(false)
+	: EnemyBase(eType_Swordsman)
 	, m_range(CVector3D(170, 10, 85)) {
 	m_img = COPY_RESOURCE("Swordsman", CImage);
 	m_pos = pos;
+	m_hp = 3;
 	m_img.ChangeAnimation((int)EState::Idle);
 	m_rect = CRect(-48, -112, 48, 0);
 	ObjectBase::Add(new Shadow(m_pos, eType_Swordsman));
@@ -167,17 +160,5 @@ void Swordsman::TakeDamage(int damage) {
 	else {
 		m_hp = 0;
 		m_state = (int)EState::Death;
-	}
-}
-
-bool Swordsman::RangePlayer(const CVector3D& pos, const CVector3D& range){
-	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
-		CVector3D playerPos = p->m_pos;
-		//Ž©•ª‚ÆƒvƒŒƒCƒ„[‚ªrangeˆÈã‚È‚çfalse
-		if (abs(pos.x - playerPos.x) > range.x) return false;
-		if (abs(pos.y - playerPos.y) > range.y) return false;
-		if (abs(pos.z - playerPos.z) > range.z) return false;
-
-		return true;
 	}
 }

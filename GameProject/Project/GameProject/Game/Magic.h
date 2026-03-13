@@ -14,7 +14,6 @@ private:
 	CVector3D m_range;
 public:
 	Magic(const CVector3D& pos, float ang);
-	~Magic();
 	void Update() override;
 	void Draw() override;
 	void Collision(ObjectBase* o);
