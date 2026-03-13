@@ -73,7 +73,7 @@ Player::Player(const CVector3D& pos, bool flip)
 	:ObjectBase(eType_Player)
 {
 	//画像複製
-	static char* mode_img[] = { "Player","PlayerWitch","PlayerSword","PlayerFighter" };
+	static char* mode_img[] = { "Player","PlayerWitch","PlayerSword","PlayerFighter"};
 	for (int i = 0;i < eModeMax;i++) {
 		m_imgList[i] = COPY_RESOURCE(mode_img[i], CImage);
 		//再生アニメーション設定
@@ -81,7 +81,7 @@ Player::Player(const CVector3D& pos, bool flip)
 		//中心位置設定
 		m_imgList[i].SetCenter(270, 370);
 	}
-	
+	ChangeMode(eModeNormal);
 	//再生アニメーション設定
 	m_img->ChangeAnimation(0);
 	//座標設定
@@ -206,16 +206,12 @@ void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
 	m_img->ChangeAnimation(eAnimAttack, false);
-	//2番目のパターンなら
-	if (m_img->GetIndex() == 2)
-	{
 		if (m_flip)
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-250, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, 100, -85), m_flip, eType_Effect,
 				m_attack_no));
 		else
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(250, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(200, -100, -85), m_flip, eType_Effect,
 				m_attack_no));
-	}
 	//アニメーションが終了したら
 	if (m_img->CheckAnimationEnd())
 	{
