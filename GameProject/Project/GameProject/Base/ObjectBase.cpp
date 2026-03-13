@@ -136,7 +136,7 @@ void ObjectBase::Add(ObjectBase* b, bool sort)
             m_list.insert(itr, b);
             return;
         }
-        //Typeが同じ場合は、SortOrder順でソート
+        //SortOrderが同じ場合は、Type順でソート
         else if (b->m_sort_order == (*itr)->m_sort_order) {
             if (b->m_type < (*itr)->m_type) {
                 m_list.insert(itr, b);

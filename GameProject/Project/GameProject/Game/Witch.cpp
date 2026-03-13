@@ -1,7 +1,6 @@
 #include "Witch.h"
 #include "Magic.h"
 #include "Player.h"
-#include "Shadow.h"
 
 TexAnim _idle[] = {
 	{0,16},
@@ -40,11 +39,11 @@ Witch::Witch(const CVector3D& pos)
 	: EnemyBase(eType_Witch)
 	, m_range(CVector3D(600, 10, 300)) {
 	m_img = COPY_RESOURCE("Witch", CImage);
+	m_shadow = COPY_RESOURCE("Shadow", CImage);
 	m_pos = pos;
 	m_hp = 3;
 	m_img.ChangeAnimation((int)EState::Idle);
 	m_rect = CRect(-48, -112, 48, 0);
-	ObjectBase::Add(new Shadow(m_pos, eType_Witch));
 }
 
 Witch::~Witch(){
@@ -83,6 +82,13 @@ void Witch::Update(){
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 }
 
+void Witch::PreDraw(){
+	m_shadow.SetSize(480, 360);
+	m_shadow.SetCenter(240, 230);
+	m_shadow.SetPos(CalcScreenPos(true));
+	m_shadow.Draw();
+}
+
 void Witch::Draw(){
 	m_img.SetRect(0, 0, 64, 64);
 	m_img.SetSize(540, 540);
@@ -90,7 +96,6 @@ void Witch::Draw(){
 	m_img.SetPos(CalcScreenPos());
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
-	//DrawRect();
 }
 
 void Witch::StateIdle(){

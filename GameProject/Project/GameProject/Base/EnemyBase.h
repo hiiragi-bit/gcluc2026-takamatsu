@@ -4,7 +4,6 @@
 
 class EnemyBase :public ObjectBase {
 public:
-	CImage m_img;
 	int m_state;
 	int m_hp;
 	int m_attackNo;
@@ -17,6 +16,7 @@ public:
 	EnemyBase(int type);
 	virtual ~EnemyBase();
 	void Update() override;
+	void PreDraw() override;
 	void Draw() override;
 	virtual void StateIdle();
 	virtual void StateDamage();

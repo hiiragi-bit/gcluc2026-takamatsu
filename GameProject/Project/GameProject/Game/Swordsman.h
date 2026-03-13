@@ -18,11 +18,13 @@ private:
 		Death,
 	};
 	CImage m_img;
+	CImage m_shadow;
 	CVector3D m_range;			//UŒ‚”ÍˆÍ
 public:
 	Swordsman(const CVector3D& pos);
 	~Swordsman();
 	void Update() override;
+	void PreDraw() override;
 	void Draw() override;
 	void StateIdle();
 	void StateAttack();

@@ -1,11 +1,11 @@
 #pragma once
+
 //Z軸の中心(0の場所)
 #define FIELD_CENTER_Z (SCREEN_HEIGHT * 0.75f)
 //Zの下限(奥)
 #define MIN_Z -230.0f
 //Zの上限(手前)
 #define MAX_Z 280.0f
-
 
 /// <summary>
 /// オブジェクトの種類

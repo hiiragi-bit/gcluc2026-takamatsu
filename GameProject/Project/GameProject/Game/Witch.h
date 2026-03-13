@@ -18,11 +18,13 @@ private:
 		Death,
 	};
 	CImage m_img;
+	CImage m_shadow;
 	CVector3D m_range;			//UŒ‚”ÍˆÍ
 public:
 	Witch(const CVector3D& pos);
 	~Witch();
 	void Update() override;
+	void PreDraw() override;
 	void Draw() override;
 	void StateIdle();
 	void StateAttack();

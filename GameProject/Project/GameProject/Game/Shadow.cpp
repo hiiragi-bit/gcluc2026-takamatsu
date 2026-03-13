@@ -37,8 +37,8 @@ void Shadow::Update(){
 }
 
 void Shadow::Draw(){
-	m_shadow.SetSize(180, 270);
-	m_shadow.SetCenter(90, 135);
+	m_shadow.SetSize(480, 360);
+	m_shadow.SetCenter(240, 230);
 	m_shadow.SetPos(CalcScreenPos(true));
 	m_shadow.Draw();
 }

@@ -19,11 +19,13 @@ private:
 		Death,
 	};
 	CImage m_img;
+	CImage m_shadow;
 	CVector3D m_range;			//UŒ‚”ÍˆÍ
 public:
 	Hero(const CVector3D& pos);
 	~Hero();
 	void Update() override;
+	void PreDraw() override;
 	void Draw() override;
 	void StateIdle() override;
 	void StateAttackSlash();

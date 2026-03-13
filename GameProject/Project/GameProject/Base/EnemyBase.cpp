@@ -23,6 +23,10 @@ void EnemyBase::Update()
 {
 }
 
+void EnemyBase::PreDraw()
+{
+}
+
 void EnemyBase::Draw()
 {
 }
