@@ -51,10 +51,10 @@ void Init(void)
 	CInput::SetButton(0, CInput::eButton4, VK_LSHIFT);
 	CInput::SetButton(0, CInput::eButton5, VK_SPACE);
 	CInput::SetButton(0, CInput::eButton10, VK_RETURN);
-	CInput::SetButton(0, CInput::eUp, 'W');
-	CInput::SetButton(0, CInput::eDown, 'S');
-	CInput::SetButton(0, CInput::eLeft, 'A');
-	CInput::SetButton(0, CInput::eRight, 'D');
+	CInput::SetButton(0, CInput::eUp, VK_UP);
+	CInput::SetButton(0, CInput::eDown, VK_DOWN);
+	CInput::SetButton(0, CInput::eLeft, VK_LEFT);
+	CInput::SetButton(0, CInput::eRight, VK_RIGHT);
 	CInput::SetButton(0, CInput::eMouseL, VK_LBUTTON);
 	CInput::SetButton(0, CInput::eMouseR, VK_RBUTTON);
 	CInput::SetButton(0, CInput::eMouseC, VK_MBUTTON);
@@ -103,6 +103,7 @@ void Init(void)
 	ADD_RESOURCE("Player", CImage::CreateImage("Player/PlayerWitch.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("Player", CImage::CreateImage("Player/PlayerSword.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("PlayerAttack", CImage::CreateImage("Player/Attack.png", PlayerAttack::_anim_data, 64, 64));
+	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
 	ObjectBase::Add(new Player(CVector3D(100, 900, 0), false));
 
 
