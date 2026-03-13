@@ -2,13 +2,11 @@
 #include "Base/ObjectBase.h"
 
 class Title :public ObjectBase {
-	//画像オブジェクト
-	CImage m_Title;
-	//待ち時間
+private:
+	CImage m_img;
 	int m_cnt;
-
 public:
 	Title();
-	void Update();
-	void Draw();
+	void Update() override;
+	void Draw() override;
 };
