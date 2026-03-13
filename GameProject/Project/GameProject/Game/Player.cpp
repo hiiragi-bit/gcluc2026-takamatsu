@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "PlayerAttack.h"
 #include "Shadow.h"
+#include "Witch.h"
+#include "Swordsman.h"
+#include "Hero.h"
 
 //待機アニメーション
 static TexAnim _idle[] = {
@@ -163,7 +166,7 @@ void Player::StateIdle()
 		m_attack_no++;
 	}
 
-	//Xキーで吸収
+	//Xキーで攻撃
 	if (PUSH(CInput::eButton2))
 	{
 		//吸収状態へ移行
@@ -241,6 +244,7 @@ void Player::StateDetransform()
 	//アニメーションが終了したら
 	if (m_img->CheckAnimationEnd())
 	{
+		ChangeMode(eModeNormal);
 		//通常状態へ
 		m_state = eState_Idle;
 	}
@@ -343,6 +347,41 @@ void Player::Draw(){
 //当たり判定
 void Player::Collision(ObjectBase* b)
 {
+	//Xキーで吸収
+	if (PUSH(CInput::eButton2))
+	{
+		switch (b->m_type)
+		{
+		//魔法使いとの判定
+		case eType_Witch:
+			if (m_type == eType_Player)
+			{
+				if (Witch* w = dynamic_cast<Witch*>(b))
+				{
+					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
+					{
+						ChangeMode(eModeWitch);
+						//w->SetKill();
+					}
+				}
+			}
+			break;
+		//剣士との判定
+		case eType_Swordsman:
+			if (m_type == eType_Player)
+			{
+				if (Swordsman* s = dynamic_cast<Swordsman*>(b))
+				{
+					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
+					{
+						ChangeMode(eModeSword);
+						//s->SetKill();
+					}
+				}
+			}
+			break;
+		}
+	}
 }
 
 //ダメージ処理
