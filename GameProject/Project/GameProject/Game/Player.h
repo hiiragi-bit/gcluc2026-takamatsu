@@ -16,7 +16,21 @@ private:
 		eAnimDamage,		//ダメージアニメーション
 	};
 
-	CImage m_img;		//プレイヤーの画像
+	enum {
+		eModeNormal,
+		eModeWitch,
+		eModeSword,
+		eModeFighter,
+		eModeMax
+	};
+
+	int m_mode;
+	CImage m_imgList[eModeMax];
+	CImage* m_img;		//プレイヤーの画像
+	void ChangeMode(int mode) {
+		m_mode = mode;
+		m_img = &m_imgList[m_mode];
+	}
 	bool m_flip;		//反転フラグ
 	bool m_is_ground;	//接地判定
 	int m_attack_no;	//攻撃番号
