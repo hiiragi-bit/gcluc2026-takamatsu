@@ -37,16 +37,11 @@ TexAnimData Witch::_animData[] = {
 };
 
 Witch::Witch(const CVector3D& pos)
-	: ObjectBase(eType_Witch)
-	, m_state((int)EState::Idle)
-	, m_hp(3)
-	, m_invincibleCnt(0.0f)
-	, m_cooldownCnt(0.0f)
-	, m_isGround(true)
-	, m_flip(false)
+	: EnemyBase(eType_Witch)
 	, m_range(CVector3D(600, 10, 300)) {
 	m_img = COPY_RESOURCE("Witch", CImage);
 	m_pos = pos;
+	m_hp = 3;
 	m_img.ChangeAnimation((int)EState::Idle);
 	m_rect = CRect(-48, -112, 48, 0);
 	ObjectBase::Add(new Shadow(m_pos, eType_Witch));
@@ -174,17 +169,5 @@ void Witch::TakeDamage(int damage){
 	else {
 		m_hp = 0;
 		m_state = (int)EState::Death;
-	}
-}
-
-bool Witch::RangePlayer(const CVector3D& pos, const CVector3D& range){
-	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
-		CVector3D playerPos = p->m_pos;
-		//Ž©•ª‚ÆƒvƒŒƒCƒ„[‚ªrangeˆÈã‚È‚çfalse
-		if (abs(pos.x - playerPos.x) > range.x) return false;
-		if (abs(pos.y - playerPos.y) > range.y) return false;
-		if (abs(pos.z - playerPos.z) > range.z) return false;
-
-		return true;
 	}
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Base/ObjectBase.h"
+#include "Base/EnemyBase.h"
 
 //移動速度
 #define HERO_MOVE_SPEED 6
@@ -8,7 +8,7 @@
 //無敵時間
 #define HERO_INVINCIBLE_TIME 60.0f
 
-class Hero :public ObjectBase {
+class Hero :public EnemyBase {
 private:
 	enum class EState {
 		Idle,
@@ -19,31 +19,17 @@ private:
 		Death,
 	};
 	CImage m_img;
-	int m_state;
-	int m_hp;
-	int m_attackNo;
-	int m_damageNo;
-	float m_invincibleCnt;		//無敵時間カウント
-	float m_cooldownCnt;		//攻撃間隔カウント
-	bool m_isGround;
-	bool m_flip;
 	CVector3D m_range;			//攻撃範囲
 public:
 	Hero(const CVector3D& pos);
 	~Hero();
 	void Update() override;
 	void Draw() override;
-	void StateIdle();
+	void StateIdle() override;
 	void StateAttackSlash();
 	void StateAttackMagic();
-	void StateDamage();
-	void StateDeath();
-	void SetDamageNo(int no) {
-		m_damageNo = no;
-	}
-	int GetDamageNo() const {
-		return m_damageNo;
-	}
+	void StateDamage() override;
+	void StateDeath() override;
 	void TakeDamage(int damage);
 	/// <summary>
 	/// 無敵時間の判定
@@ -53,12 +39,5 @@ public:
 		if (m_invincibleCnt != 0) return true;
 		return false;
 	}
-	/// <summary>
-	/// プレイヤーとの距離
-	/// </summary>
-	/// <param name="pos">自分の座標</param>
-	/// <param name="range">測りたい距離</param>
-	/// <returns></returns>
-	bool RangePlayer(const CVector3D& pos, const CVector3D& range);
 	static TexAnimData _animData[];
 };

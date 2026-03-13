@@ -11,10 +11,6 @@ Magic::Magic(const CVector3D& pos, float ang)
 	m_vec = CVector3D(sin(ang), 0.0f, -cos(ang)) * MAGIC_SPEED;
 }
 
-Magic::~Magic()
-{
-}
-
 void Magic::Update(){
 	m_pos += m_vec;
 	//3•bŒo‚Â‚Æíœ
