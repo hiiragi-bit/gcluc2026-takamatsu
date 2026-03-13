@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "PlayerAttack.h"
 #include "Shadow.h"
+#include "Witch.h"
+#include "Swordsman.h"
+#include "Hero.h"
 
 //待機アニメーション
 static TexAnim _idle[] = {
@@ -73,13 +76,21 @@ Player::Player(const CVector3D& pos, bool flip)
 	:ObjectBase(eType_Player)
 {
 	//画像複製
-	m_img = COPY_RESOURCE("Player", CImage);
+	static char* mode_img[] = { "Player","PlayerWitch","PlayerSword","PlayerFighter"};
+	for (int i = 0;i < eModeMax;i++) {
+		m_imgList[i] = COPY_RESOURCE(mode_img[i], CImage);
+		//再生アニメーション設定
+		m_imgList[i].ChangeAnimation(0);
+		//中心位置設定
+		m_imgList[i].SetCenter(270, 370);
+	}
+	ChangeMode(eModeNormal);
 	//再生アニメーション設定
-	m_img.ChangeAnimation(0);
+	m_img->ChangeAnimation(0);
 	//座標設定
 	m_pos = pos;
 	//中心位置設定
-	m_img.SetCenter(270, 370);
+	m_img->SetCenter(270, 370);
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
@@ -155,7 +166,7 @@ void Player::StateIdle()
 		m_attack_no++;
 	}
 
-	//Xキーで吸収
+	//Xキーで攻撃
 	if (PUSH(CInput::eButton2))
 	{
 		//吸収状態へ移行
@@ -179,17 +190,17 @@ void Player::StateIdle()
 	if (!m_is_ground)
 	{
 		//ジャンプアニメーション
-		m_img.ChangeAnimation(eAnimJump, false);
+		m_img->ChangeAnimation(eAnimJump, false);
 	}
 	//地面にいるなら
 	else
 	{
 		if (move_flag)
 			//走るアニメーション
-			m_img.ChangeAnimation(eAnimRun);
+			m_img->ChangeAnimation(eAnimRun);
 		else
 			//待機アニメーション
-			m_img.ChangeAnimation(eAnimIdle);
+			m_img->ChangeAnimation(eAnimIdle);
 	}
 }
 
@@ -197,19 +208,15 @@ void Player::StateIdle()
 void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
-	m_img.ChangeAnimation(eAnimAttack, false);
-	//2番目のパターンなら
-	if (m_img.GetIndex() == 2)
-	{
+	m_img->ChangeAnimation(eAnimAttack, false);
 		if (m_flip)
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-250, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, 100, -85), m_flip, eType_Effect,
 				m_attack_no));
 		else
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(250, -150, 0), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(200, -100, -85), m_flip, eType_Effect,
 				m_attack_no));
-	}
 	//アニメーションが終了したら
-	if (m_img.CheckAnimationEnd())
+	if (m_img->CheckAnimationEnd())
 	{
 		//通常状態へ移行
 		m_state = eState_Idle;
@@ -220,9 +227,9 @@ void Player::StateAttack()
 void Player::StateAbsorption()
 {
 	//吸収アニメーションへ変更
-	m_img.ChangeAnimation(eAnimAbsorption, false);
+	m_img->ChangeAnimation(eAnimAbsorption, false);
 	//アニメーションが終了したら
-	if (m_img.CheckAnimationEnd())
+	if (m_img->CheckAnimationEnd())
 	{
 		//通常状態へ移行
 		m_state = eState_Idle;
@@ -233,10 +240,11 @@ void Player::StateAbsorption()
 void Player::StateDetransform()
 {
 	//変身解除アニメーションへ変更
-	m_img.ChangeAnimation(eAnimDetransform, false);
+	m_img->ChangeAnimation(eAnimDetransform, false);
 	//アニメーションが終了したら
-	if (m_img.CheckAnimationEnd())
+	if (m_img->CheckAnimationEnd())
 	{
+		ChangeMode(eModeNormal);
 		//通常状態へ
 		m_state = eState_Idle;
 	}
@@ -246,9 +254,9 @@ void Player::StateDetransform()
 void Player::StateDamage()
 {
 	//ダメージアニメーションへ変更
-	m_img.ChangeAnimation(eAnimDamage, false);
+	m_img->ChangeAnimation(eAnimDamage, false);
 	//アニメーションが終了したら
-	if (m_img.CheckAnimationEnd())
+	if (m_img->CheckAnimationEnd())
 	{
 		//通常状態へ
 	m_state = eState_Idle;
@@ -259,9 +267,9 @@ void Player::StateDamage()
 void Player::StateDeath()
 {
 	//死亡アニメーションへ変更
-	m_img.ChangeAnimation(eAnimDeath, false);
+	m_img->ChangeAnimation(eAnimDeath, false);
 	//アニメーションが終了したら
-	if (m_img.CheckAnimationEnd())
+	if (m_img->CheckAnimationEnd())
 	{
 		//プレイヤーを削除
 		SetKill();
@@ -319,19 +327,19 @@ void Player::Update()
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 
 	//アニメーション更新
-	m_img.UpdateAnimation();
+	m_img->UpdateAnimation();
 }
 
 //描画処理
 void Player::Draw(){
 	//位置設定
-	m_img.SetPos(CalcScreenPos());
+	m_img->SetPos(CalcScreenPos());
 	//表示サイズ設定
-	m_img.SetSize(540, 540);
+	m_img->SetSize(540, 540);
 	//反転設定
-	m_img.SetFlipH(m_flip);
+	m_img->SetFlipH(m_flip);
 	//描画
-	m_img.Draw();
+	m_img->Draw();
 	//当たり判定矩形
 	DrawRect();
 }
@@ -339,6 +347,41 @@ void Player::Draw(){
 //当たり判定
 void Player::Collision(ObjectBase* b)
 {
+	//Xキーで吸収
+	if (PUSH(CInput::eButton2))
+	{
+		switch (b->m_type)
+		{
+		//魔法使いとの判定
+		case eType_Witch:
+			if (m_type == eType_Player)
+			{
+				if (Witch* w = dynamic_cast<Witch*>(b))
+				{
+					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
+					{
+						ChangeMode(eModeWitch);
+						//w->SetKill();
+					}
+				}
+			}
+			break;
+		//剣士との判定
+		case eType_Swordsman:
+			if (m_type == eType_Player)
+			{
+				if (Swordsman* s = dynamic_cast<Swordsman*>(b))
+				{
+					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
+					{
+						ChangeMode(eModeSword);
+						//s->SetKill();
+					}
+				}
+			}
+			break;
+		}
+	}
 }
 
 //ダメージ処理
