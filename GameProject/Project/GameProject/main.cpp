@@ -8,6 +8,7 @@
 #include "Game/Witch.h"
 #include "UI/HP.h"
 #include "Game/PlayerAttack.h"
+#include "UI/Weaponicon.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -103,9 +104,16 @@ void Init(void)
 	ADD_RESOURCE("PlayerWitch", CImage::CreateImage("Player/PlayerWitch.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("PlayerSword", CImage::CreateImage("Player/PlayerSword.png", Player::_anim_data, 64, 64));
 	ADD_RESOURCE("PlayerFighter", CImage::CreateImage("Player/PlayerSword.png", Player::_anim_data, 64, 64));
-	//ADD_RESOURCE("PlayerAttack", CImage::CreateImage("Player/Attack.png", PlayerAttack::_anim_data, 64, 64));
+	ADD_RESOURCE("PlayerBullet", CImage::CreateImage("Player/PlayerBullet.png"));
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
+	ADD_RESOURCE("NormalIcon", CImage::CreateImage("UI/Weaponicon.png"));
+	ADD_RESOURCE("WitchIcon", CImage::CreateImage("UI/Witchicon.png"));
+	ADD_RESOURCE("SwordIcon", CImage::CreateImage("UI/Swordicon.png"));
+	ADD_RESOURCE("FighterIcon", CImage::CreateImage("UI/Fightericon.png"));
 	ObjectBase::Add(new Player(CVector3D(100, 900, 0), false));
+	ObjectBase::Add(new Weaponicon);
+
+	
 
 
 	//òaêÚ

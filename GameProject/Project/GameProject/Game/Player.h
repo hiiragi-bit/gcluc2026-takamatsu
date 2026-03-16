@@ -1,7 +1,8 @@
 #pragma once
 #include "Base/ObjectBase.h"
+#include "UI/Weaponicon.h"
 
-class Player :public ObjectBase 
+class Player :public ObjectBase
 {
 private:
 	//アニメーションの種類
@@ -16,6 +17,7 @@ private:
 		eAnimDamage,		//ダメージアニメーション
 	};
 
+	//モードの種類
 	enum {
 		eModeNormal,
 		eModeWitch,

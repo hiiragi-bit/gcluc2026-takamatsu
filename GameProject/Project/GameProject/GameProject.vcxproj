@@ -29,6 +29,7 @@
     <ClInclude Include="Game\MapObject.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\PlayerAttack.h" />
+    <ClInclude Include="Game\PlayerBullet.h" />
     <ClInclude Include="Game\Shadow.h" />
     <ClInclude Include="Game\Slash.h" />
     <ClInclude Include="Game\Swordsman.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Title\Clear.h" />
     <ClInclude Include="Title\Title.h" />
     <ClInclude Include="UI\HP.h" />
+    <ClInclude Include="UI\Weaponicon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\EnemyBase.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="Game\MapObject.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerAttack.cpp" />
+    <ClCompile Include="Game\PlayerBullet.cpp" />
     <ClCompile Include="Game\Shadow.cpp" />
     <ClCompile Include="Game\Slash.cpp" />
     <ClCompile Include="Game\Swordsman.cpp" />
@@ -57,6 +60,7 @@
     <ClCompile Include="Title\Clear.cpp" />
     <ClCompile Include="Title\Title.cpp" />
     <ClCompile Include="UI\HP.cpp" />
+    <ClCompile Include="UI\Weaponicon.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FE2CE3B1-49BF-46A5-9DB1-9BD5B52FE1A0}</ProjectGuid>
