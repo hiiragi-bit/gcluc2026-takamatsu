@@ -3,6 +3,7 @@
 
 EnemyBase::EnemyBase(int type)
 	: ObjectBase(type)
+	, m_range(0, 0, 0)
 	, m_state(0)
 	, m_hp(0)
 	, m_attackNo(rand())
@@ -12,6 +13,7 @@ EnemyBase::EnemyBase(int type)
 	, m_isGround(true)
 	, m_flip(false) {
 	EnemyManager::Instance()->Add(this);
+	m_shadow = COPY_RESOURCE("Shadow", CImage);
 }
 
 EnemyBase::~EnemyBase()
@@ -25,6 +27,10 @@ void EnemyBase::Update()
 
 void EnemyBase::PreDraw()
 {
+	m_shadow.SetSize(480, 360);
+	m_shadow.SetCenter(240, 230);
+	m_shadow.SetPos(CalcScreenPos(true));
+	m_shadow.Draw();
 }
 
 void EnemyBase::Draw()
@@ -32,6 +38,10 @@ void EnemyBase::Draw()
 }
 
 void EnemyBase::StateIdle()
+{
+}
+
+void EnemyBase::StateAttack()
 {
 }
 

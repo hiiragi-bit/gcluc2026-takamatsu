@@ -41,11 +41,10 @@ TexAnimData Hero::_animData[] = {
 };
 
 Hero::Hero(const CVector3D& pos)
-	: EnemyBase(eType_Hero)
-	, m_range(CVector3D(300, 10, 150)) {
+	: EnemyBase(eType_Hero) {
 	m_img = COPY_RESOURCE("Hero", CImage);
-	m_shadow = COPY_RESOURCE("Shaodw", CImage);
 	m_pos = pos;
+	m_range = CVector3D(300, 10, 150);
 	m_state = ((int)EState::Idle);
 	m_hp = 20;
 	m_img.ChangeAnimation((int)EState::Idle);
@@ -90,13 +89,6 @@ void Hero::Update(){
 	}
 	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
-}
-
-void Hero::PreDraw(){
-	m_shadow.SetSize(480, 360);
-	m_shadow.SetCenter(240, 230);
-	m_shadow.SetPos(CalcScreenPos(true));
-	m_shadow.Draw();
 }
 
 void Hero::Draw(){

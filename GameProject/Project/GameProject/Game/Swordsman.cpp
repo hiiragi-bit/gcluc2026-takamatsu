@@ -34,11 +34,10 @@ TexAnimData Swordsman::_animData[] = {
 };
 
 Swordsman::Swordsman(const CVector3D& pos)
-	: EnemyBase(eType_Swordsman)
-	, m_range(CVector3D(170, 10, 85)) {
+	: EnemyBase(eType_Swordsman) {
 	m_img = COPY_RESOURCE("Swordsman", CImage);
-	m_shadow = COPY_RESOURCE("Shadow", CImage);
 	m_pos = pos;
+	m_range = CVector3D(170, 10, 85);
 	m_hp = 3;
 	m_img.ChangeAnimation((int)EState::Idle);
 	m_rect = CRect(-48, -112, 48, 0);
@@ -79,13 +78,6 @@ void Swordsman::Update() {
 	}
 	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
-}
-
-void Swordsman::PreDraw(){
-	m_shadow.SetSize(480, 360);
-	m_shadow.SetCenter(240, 230);
-	m_shadow.SetPos(CalcScreenPos(true));
-	m_shadow.Draw();
 }
 
 void Swordsman::Draw() {
