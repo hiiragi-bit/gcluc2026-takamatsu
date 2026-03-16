@@ -6,9 +6,9 @@ class HP :public ObjectBase {
 public:
 	CImage m_img;
 	int m_chengehp;
+	static int UI_hp ;
 public:
 	HP(const CVector3D& pos);
 	void Update();
 	void Draw();
-	void ChengeHP(int hp);
 };

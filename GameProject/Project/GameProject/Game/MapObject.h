@@ -1,5 +1,6 @@
 #pragma once
 #include "Base/ObjectBase.h"
+#include"Player.h"
 class MapObject :public ObjectBase
 {
 public:
@@ -11,6 +12,7 @@ public:
 
 	void Update() ;
 	void Draw() ;
+	void Collision(ObjectBase* b);
 private:
 	char m_objectname;
 	int  m_objectnb;
@@ -22,5 +24,6 @@ private:
 	//” 
 	CImage m_box;
 	
+
 
 };
