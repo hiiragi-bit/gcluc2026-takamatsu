@@ -4,6 +4,8 @@
 
 class EnemyBase :public ObjectBase {
 public:
+	CImage m_shadow;
+	CVector3D m_range;			//UŒ‚”ÍˆÍ
 	int m_state;
 	int m_hp;
 	int m_attackNo;
@@ -19,6 +21,7 @@ public:
 	void PreDraw() override;
 	void Draw() override;
 	virtual void StateIdle();
+	virtual void StateAttack();
 	virtual void StateDamage();
 	virtual void StateDeath();
 	void SetDamageNo(int no) {

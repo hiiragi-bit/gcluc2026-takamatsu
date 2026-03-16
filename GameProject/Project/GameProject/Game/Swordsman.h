@@ -18,18 +18,15 @@ private:
 		Death,
 	};
 	CImage m_img;
-	CImage m_shadow;
-	CVector3D m_range;			//çUåÇîÕàÕ
 public:
 	Swordsman(const CVector3D& pos);
 	~Swordsman();
 	void Update() override;
-	void PreDraw() override;
 	void Draw() override;
-	void StateIdle();
-	void StateAttack();
-	void StateDamage();
-	void StateDeath();
+	void StateIdle() override;
+	void StateAttack() override;
+	void StateDamage() override;
+	void StateDeath() override;
 	void TakeDamage(int damage);
 	static TexAnimData _animData[];
 };

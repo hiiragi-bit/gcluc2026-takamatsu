@@ -6,9 +6,8 @@
 
 class Slash :public ObjectBase {
 private:
-	//CImage m_img;
 	int m_attackNo;
-	int m_cnt;			//‰¼
+	int m_cnt;
 	CVector3D m_range;
 public:
 	Slash(const CVector3D& pos, int attack_no, const CVector3D& range);
