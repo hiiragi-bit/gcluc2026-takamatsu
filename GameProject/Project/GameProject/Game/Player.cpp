@@ -342,7 +342,7 @@ void Player::Update()
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 
 	//スクロール設定
-	//m_scroll.x = m_pos.x - 1920 / 2;
+	m_scroll.x = m_pos.x - 1920 / 2;
 
 	//アニメーション更新
 	m_img->UpdateAnimation();
