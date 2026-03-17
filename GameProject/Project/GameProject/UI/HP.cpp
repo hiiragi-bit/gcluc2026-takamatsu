@@ -1,6 +1,6 @@
 #include "HP.h"
 
-int HP::UI_hp = 0;
+int HP::UI_hp = 6;
 HP::HP(const CVector3D& pos):ObjectBase(eType_UI){
 	m_img = COPY_RESOURCE("Heart", CImage);
 	m_pos = pos;

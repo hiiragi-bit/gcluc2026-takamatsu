@@ -86,6 +86,7 @@ Player::Player(const CVector3D& pos, bool flip)
 		//中心位置設定
 		m_imgList[i].SetCenter(270, 370);
 	}
+	ObjectBase::Add(m_weapon_icon = new Weaponicon);
 	//通常モードへ
 	ChangeMode(eModeNormal);
 	//再生アニメーション設定
@@ -409,6 +410,7 @@ void Player::TakeDamage(int damage)
 {
 	//HP減少、下限0
 	m_hp = max(m_hp - damage, 0);
+	HP::UI_hp--;
 	//HPが0以下なら
 	if (m_hp <= 0)
 	{
