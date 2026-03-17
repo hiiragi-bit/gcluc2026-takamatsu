@@ -24,13 +24,15 @@ Map::~Map() {
 }
 void Map::Update() 
 {
-   
+	
+		
+	
 }
 void Map::PreDraw()
 {
 	
+	sc = m_scroll / 16;
 	m_sky.SetSize(1920, 1080); 
-	CVector3D sc(m_scroll / 10);
 	m_sky.SetRect(sc.x, 0, sc.x+150,75);
 	m_sky.Draw();
 
@@ -41,7 +43,7 @@ void Map::PreDraw()
 	
  }
 
-
+	
 
       
 

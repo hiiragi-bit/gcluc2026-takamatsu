@@ -1,10 +1,12 @@
 #pragma once
 #include "Base/ObjectBase.h"
 #include"Player.h"
+#include"Shadow.h"
+#include"Map.h"
 class MapObject :public ObjectBase
 {
 public:
-	
+	int state;
 public:
 	MapObject(const CVector3D&pos,char objectname,int objectnb);
 	//オブジェクトの種類に応じて画像を変更
@@ -13,6 +15,8 @@ public:
 	void Update() ;
 	void Draw() ;
 	void Collision(ObjectBase* b);
+	int CollisionPoint(const CVector3D& pos);
+	int CollisionRect(const CVector3D& pos, const CRect& rect);
 private:
 	char m_objectname;
 	int  m_objectnb;

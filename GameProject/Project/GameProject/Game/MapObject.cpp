@@ -13,10 +13,11 @@ MapObject::MapObject(const CVector3D& pos,char objectname,int objectnb) : Object
 	m_box = COPY_RESOURCE("Box", CImage);
 	m_well = COPY_RESOURCE("Well", CImage);
 	m_fence = COPY_RESOURCE("Fence", CImage);
+	ObjectBase::Add(new Shadow(m_pos, eType_Fence));
 	ChangeObject();
 }
 void MapObject::ChangeObject() 
-{
+{ 
 	CVector3D sc(m_scroll / 8);
 	//オブジェクトの種類に応じて画像を変更
 	switch (m_objectname)
@@ -49,7 +50,7 @@ void MapObject::ChangeObject()
 		case 5:	
 			m_box.SetRect(96, 0, 120, 24);
 			m_box.SetSize(240,240);
-			m_box.SetCenter(120, 120);
+			m_box.SetCenter(120, 240);
 			break;
 		}
 		break;
@@ -68,7 +69,7 @@ void MapObject::ChangeObject()
 			break;
 		}
 		m_well.SetSize(320,320);
-		m_well.SetCenter(160,160);
+		m_well.SetCenter(160,300);
 		break;
 	case eType_Fence:
 		//柵の画像の種類を設定
@@ -85,7 +86,7 @@ void MapObject::ChangeObject()
 				break;
 		}
 		m_fence.SetSize(240,240);
-		m_fence.SetCenter(120, 120);
+		m_fence.SetCenter(120, 240);
 		
 		break;
 		break;
@@ -102,18 +103,17 @@ void MapObject::Draw() {
 	switch (m_objectname)
 	{
 		case eType_Box:
-		m_box.SetPos(GetScreenPos(m_pos));
+		m_box.SetPos(CalcScreenPos());
 		m_box.Draw();
-		DrawRect();
 		break;
 
 	case eType_Well:
-		m_well.SetPos(GetScreenPos(m_pos));
+		m_well.SetPos(CalcScreenPos());
 		m_well.Draw();
 		break;
 		 
 	case eType_Fence:
-		m_fence.SetPos(GetScreenPos(m_pos));
+		m_fence.SetPos(CalcScreenPos());
 		m_fence.Draw();
 		break;
 	}
@@ -121,6 +121,48 @@ void MapObject::Draw() {
 }
 void MapObject::Collision(ObjectBase* b) 
 {
-	
-	
+	switch (b->m_type)
+	{
+
+	case eType_Player:
+		if (Player* p = dynamic_cast<Player*>(b))
+		{
+			if (ObjectBase::CollisionRect(this, p))
+			{
+				state = 1;
+			}
+			else
+			{
+				state = 0;
+			}
+		}
+		break;
+
+	}
+}
+int MapObject::CollisionPoint(const CVector3D& pos)
+{
+	//1点のみ検証
+	int t = state;
+	if (t != 0) return t;
+	return 0;
+}
+
+int MapObject::CollisionRect(const CVector3D& pos, const CRect& rect)
+{
+	CRect r = CRect(
+		pos.x + rect.m_left,
+		pos.y + rect.m_top,
+		pos.x + rect.m_right,
+		pos.y + rect.m_bottom);
+	int t;
+	t = CollisionPoint(CVector2D(r.m_left, r.m_top));
+	if (t != 0) return t;
+	t = CollisionPoint(CVector2D(r.m_right, r.m_top));
+	if (t != 0) return t;
+	t = CollisionPoint(CVector2D(r.m_left, r.m_bottom));
+	if (t != 0) return t;
+	t = CollisionPoint(CVector2D(r.m_right, r.m_bottom));
+	if (t != 0) return t;
+	return 0;
 }
