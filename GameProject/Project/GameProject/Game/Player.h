@@ -29,9 +29,11 @@ private:
 	int m_mode;
 	CImage m_imgList[eModeMax];
 	CImage* m_img;		//プレイヤーの画像
+	Weaponicon* m_weapon_icon;
 	void ChangeMode(int mode) {
 		m_mode = mode;
 		m_img = &m_imgList[m_mode];
+		m_weapon_icon->ChangeIcon(m_mode);
 	}
 	bool m_flip;		//反転フラグ
 	bool m_is_ground;	//接地判定

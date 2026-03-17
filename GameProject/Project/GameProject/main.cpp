@@ -111,8 +111,8 @@ void Init(void)
 	ADD_RESOURCE("WitchIcon", CImage::CreateImage("UI/Witchicon.png"));
 	ADD_RESOURCE("SwordIcon", CImage::CreateImage("UI/Swordicon.png"));
 	ADD_RESOURCE("FighterIcon", CImage::CreateImage("UI/Fightericon.png"));
-	ObjectBase::Add(new Player(CVector3D(100, 900, 0), false));
-	ObjectBase::Add(new Weaponicon);
+	ObjectBase::Add(new Player(CVector3D(100, 0, 0), false));
+
 
 	
 
