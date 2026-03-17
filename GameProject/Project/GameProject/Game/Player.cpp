@@ -410,6 +410,7 @@ void Player::TakeDamage(int damage)
 {
 	//HPå∏è≠ÅAâ∫å¿0
 	m_hp = max(m_hp - damage, 0);
+	HP::UI_hp--;
 	//HPÇ™0à»â∫Ç»ÇÁ
 	if (m_hp <= 0)
 	{

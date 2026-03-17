@@ -136,9 +136,9 @@ void Init(void)
 	ADD_RESOURCE("Fence", CImage::CreateImage("Map/fence.png"));
 	ADD_RESOURCE("Box", CImage::CreateImage("Map/box.png"));
 	ObjectBase::Add(new Map());
-	ObjectBase::Add(new MapObject(CVector3D(900,750,0),eType_Well,1));
-	ObjectBase::Add(new MapObject(CVector3D(200,600,0),eType_Fence,3));
-	ObjectBase::Add(new MapObject(CVector3D(600,500,3),eType_Box,4));
+	ObjectBase::Add(new MapObject(CVector3D(900,0,0),eType_Well,1));
+	ObjectBase::Add(new MapObject(CVector3D(200,0,2),eType_Fence,3));
+	ObjectBase::Add(new MapObject(CVector3D(600,0,3),eType_Box,4));
 
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Base/ObjectBase.h"
 #include "UI/Weaponicon.h"
+#include"UI/HP.h"
 
 class Player :public ObjectBase
 {
