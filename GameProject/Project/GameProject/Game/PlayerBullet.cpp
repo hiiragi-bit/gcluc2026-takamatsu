@@ -3,6 +3,16 @@
 #include "Swordsman.h"
 #include "Hero.h"
 
+TexAnim _bullet[] = {
+	{2,2},
+	{1,2},
+	{0,2},
+};
+
+TexAnimData PlayerBullet::_anim_data[] = {
+	ANIMDATA(_bullet),
+};
+
 //コンストラクタ
 PlayerBullet::PlayerBullet(const CVector3D& pos, bool flip, int type, int attack_no)
 	:ObjectBase(eType_Effect)
@@ -14,13 +24,13 @@ PlayerBullet::PlayerBullet(const CVector3D& pos, bool flip, int type, int attack
 	//座標設定
 	m_pos = pos;
 	//サイズ設定
-	m_img.SetSize(125, 25);
+	m_img.SetSize(64, 64);
 	//中心位置設定
-	m_img.SetCenter(63, 13);
+	m_img.SetCenter(32, 32);
 	//当たり判定用矩形設定
-	m_rect = CRect(-63, -13, 63, 12);
+	m_rect = CRect(-30, -10, 30, 10);
 	//再生アニメーション設定(非ループ)
-	//m_img.ChangeAnimation(0, false);
+	m_img.ChangeAnimation(0);
 	//攻撃番号
 	m_attack_no = attack_no;
 }
