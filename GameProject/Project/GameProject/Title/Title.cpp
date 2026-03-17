@@ -19,6 +19,6 @@ void Title::Update(){
 
 void Title::Draw(){
 	m_img.SetSize(1920, 1080);
-	m_img.SetPos(GetScreenPos(m_pos));
+	//m_img.SetPos(GetScreenPos(m_pos));
 	m_img.Draw();
 }

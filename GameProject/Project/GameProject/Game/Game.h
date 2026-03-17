@@ -1,5 +1,7 @@
 #pragma once
 #include "Base/ObjectBase.h"
+#include"Game/MapObject.h"
+#include"Game/Map.h"
 
 class Game :public ObjectBase {
 private:

@@ -11,6 +11,7 @@
 #include "Game/PlayerAttack.h"
 #include "UI/Weaponicon.h"
 #include "Game/PlayerBullet.h"
+#include "Title/Title.h"
 
 void MainLoop(void) {
 	//--------------------------------------------------------------
@@ -112,7 +113,7 @@ void Init(void)
 	ADD_RESOURCE("WitchIcon", CImage::CreateImage("UI/Witchicon.png"));
 	ADD_RESOURCE("SwordIcon", CImage::CreateImage("UI/Swordicon.png"));
 	ADD_RESOURCE("FighterIcon", CImage::CreateImage("UI/Fightericon.png"));
-	ObjectBase::Add(new Player(CVector3D(100, 0, 0), false));
+	
 
 
 	
@@ -126,20 +127,19 @@ void Init(void)
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
 	ADD_RESOURCE("Timer", CImage::CreateImage("Title/Timer.png"));
-	ObjectBase::Add(new Game());
+	//ObjectBase::Add(new Game());
 
 	//’Ï
 	ADD_RESOURCE("Heart", CImage::CreateImage("UI/HP.png"));
-	ObjectBase::Add(new HP(CVector3D(50, 50, 0)));
 	ADD_RESOURCE("Ground", CImage::CreateImage("Map/Ground.png"));
 	ADD_RESOURCE("Sky", CImage::CreateImage("Map/Sky.png"));
 	ADD_RESOURCE("Well", CImage::CreateImage("Map/well.png"));
 	ADD_RESOURCE("Fence", CImage::CreateImage("Map/fence.png"));
 	ADD_RESOURCE("Box", CImage::CreateImage("Map/box.png"));
-	ObjectBase::Add(new Map());
-	ObjectBase::Add(new MapObject(CVector3D(900,0,0),eType_Well,1));
-	ObjectBase::Add(new MapObject(CVector3D(200,0,2),eType_Fence,3));
-	ObjectBase::Add(new MapObject(CVector3D(600,0,3),eType_Box,4));
+	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
+	ObjectBase::Add(new Title());
+
+	
 
 
 
