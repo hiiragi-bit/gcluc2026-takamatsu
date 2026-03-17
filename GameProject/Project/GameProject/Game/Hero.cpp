@@ -82,6 +82,7 @@ void Hero::Update(){
 	//d—Í‚É‚æ‚é—‰º
 	m_vec.y += GRAVITY;
 
+	if (m_pos.x < ENEMY_MIN_X) m_pos.x = ENEMY_MIN_X;
 	if (m_pos.y <= 0) {
 		m_pos.y = 0;
 		m_vec.y = 0;

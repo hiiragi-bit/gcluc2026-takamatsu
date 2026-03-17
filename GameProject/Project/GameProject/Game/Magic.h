@@ -24,4 +24,5 @@ public:
 	/// <param name="range">‘ª‚è‚½‚¢‹——£</param>
 	/// <returns></returns>
 	bool RangePlayer(const CVector3D& pos, const CVector3D& range);
+	static TexAnimData _animData[];
 };

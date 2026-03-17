@@ -1,6 +1,7 @@
 #include "Base/ObjectBase.h"
 #include "Game/Game.h"
 #include "Game/Hero.h"
+#include "Game/Magic.h"
 #include "Game/Player.h"
 #include "Game/Swordsman.h"
 #include"Game/MapObject.h"
@@ -118,7 +119,7 @@ void Init(void)
 
 	//òaêÚ
 	ADD_RESOURCE("Witch", CImage::CreateImage("Enemy/Witch.png", Witch::_animData, 64, 64));
-	ADD_RESOURCE("Magic", CImage::CreateImage("Enemy/Bullet.png"));
+	ADD_RESOURCE("Magic", CImage::CreateImage("Enemy/Magic.png", Magic::_animData, 64, 64));
 	ADD_RESOURCE("Swordsman", CImage::CreateImage("Enemy/Swordsman.png", Swordsman::_animData, 64, 64));
 	ADD_RESOURCE("Hero", CImage::CreateImage("Enemy/Hero.png", Hero::_animData, 64, 64));
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
