@@ -49,6 +49,17 @@ void EnemyManager::Update()
 	}
 }
 
+void EnemyManager::Add(EnemyBase* enemy)
+{
+	m_enemies.push_back(enemy);
+}
+
+void EnemyManager::Remove(EnemyBase* enemy)
+{
+	auto itr = std::remove(m_enemies.begin(), m_enemies.end(), enemy);
+	m_enemies.erase(itr, m_enemies.end());
+}
+
 EnemyManager* EnemyManager::Instance()
 {
 	// インスタンスがなければ、生成

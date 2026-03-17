@@ -26,6 +26,8 @@ private:
 public:
 	void Update() override;
 	static EnemyManager* Instance();
+	void Add(EnemyBase* enemy);
+	void Remove(EnemyBase* enemy);
 	/// <summary>
 	/// Žw’è‚µ‚½ˆÊ’u‚©‚çˆê”Ô‹ß‚¢“G‚ðŽæ“¾
 	/// </summary>

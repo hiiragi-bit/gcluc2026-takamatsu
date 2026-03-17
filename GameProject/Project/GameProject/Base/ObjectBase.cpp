@@ -91,8 +91,7 @@ void ObjectBase::DrawAll()
 void ObjectBase::CheckKillAll()
 {
     auto it = m_list.begin();
-    auto last = m_list.end();
-    while (it != last) {
+    while (it != m_list.end()) {
         if ((*it)->m_kill) {
             delete (*it);
             //リストから除外、次の要素のポインタを受け取る
@@ -105,8 +104,7 @@ void ObjectBase::CheckKillAll()
     }
 
     it = m_obj_list.begin();
-    last = m_obj_list.end();
-    while (it != last) {
+    while (it != m_obj_list.end()) {
         if ((*it)->m_kill) {
             //オブジェクトリストから除外、次の要素のポインタを受け取る
             it = m_obj_list.erase(it);
