@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "PlayerAttack.h"
+#include "PlayerBullet.h"
 #include "Shadow.h"
 #include "Witch.h"
 #include "Swordsman.h"
 #include "Hero.h"
+#include "UI/Weaponicon.h"
 
 //待機アニメーション
 static TexAnim _idle[] = {
@@ -84,6 +86,7 @@ Player::Player(const CVector3D& pos, bool flip)
 		//中心位置設定
 		m_imgList[i].SetCenter(270, 370);
 	}
+	//通常モードへ
 	ChangeMode(eModeNormal);
 	//再生アニメーション設定
 	m_img->ChangeAnimation(0);
@@ -209,12 +212,24 @@ void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
 	m_img->ChangeAnimation(eAnimAttack, false);
+	if (m_mode == eModeWitch)
+	{
 		if (m_flip)
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, 100, -85), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerBullet(m_pos + CVector3D(-150, 100, 0), m_flip, eType_Effect,
 				m_attack_no));
 		else
-			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(200, -100, -85), m_flip, eType_Effect,
+			ObjectBase::Add(new PlayerBullet(m_pos + CVector3D(200, -100, -200), m_flip, eType_Effect,
 				m_attack_no));
+	}
+	else
+	{
+		if (m_flip)
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(-150, 100, 0), m_flip, eType_Effect,
+				m_attack_no));
+		else
+			ObjectBase::Add(new PlayerAttack(m_pos + CVector3D(200, -100, -200), m_flip, eType_Effect,
+				m_attack_no));
+	}
 	//アニメーションが終了したら
 	if (m_img->CheckAnimationEnd())
 	{
@@ -326,6 +341,9 @@ void Player::Update()
 	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
 
+	//スクロール設定
+	//m_scroll.x = m_pos.x - 1920 / 2;
+
 	//アニメーション更新
 	m_img->UpdateAnimation();
 }
@@ -341,7 +359,7 @@ void Player::Draw(){
 	//描画
 	m_img->Draw();
 	//当たり判定矩形
-	DrawRect();
+	//DrawRect();
 }
 
 //当たり判定
@@ -360,6 +378,7 @@ void Player::Collision(ObjectBase* b)
 				{
 					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
 					{
+						//魔法使いモードへ
 						ChangeMode(eModeWitch);
 						//w->SetKill();
 					}
@@ -374,6 +393,7 @@ void Player::Collision(ObjectBase* b)
 				{
 					if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 64)
 					{
+						//剣士モードへ
 						ChangeMode(eModeSword);
 						//s->SetKill();
 					}

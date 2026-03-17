@@ -2,6 +2,9 @@
 #include "Base/ObjectBase.h"
 #include "Game/Player.h"
 
+//X‚Ì‰ºŒÀ
+#define ENEMY_MIN_X 70
+
 class EnemyBase :public ObjectBase {
 public:
 	CImage m_shadow;

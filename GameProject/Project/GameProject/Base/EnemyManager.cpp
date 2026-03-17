@@ -24,7 +24,7 @@ EnemyManager::~EnemyManager()
 void EnemyManager::Update()
 {
 	//生成上限に達していなければ
-	if (m_enemyCnt < MAX_ENEMY)
+	if (m_enemyCnt <= MAX_ENEMY)
 	{
 		bool b = RangePlayer(m_enemyPos, SPAWN_RANGE);
 		//プレイヤーが近くまで来たら
@@ -47,17 +47,6 @@ void EnemyManager::Update()
 			}
 		}
 	}
-}
-
-void EnemyManager::Add(EnemyBase* enemy)
-{
-	m_enemies.push_back(enemy);
-}
-
-void EnemyManager::Remove(EnemyBase* enemy)
-{
-	auto itr = std::remove(m_enemies.begin(), m_enemies.end(), enemy);
-	m_enemies.erase(itr, m_enemies.end());
 }
 
 EnemyManager* EnemyManager::Instance()

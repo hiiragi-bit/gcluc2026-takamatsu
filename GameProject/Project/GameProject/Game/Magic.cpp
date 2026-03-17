@@ -1,6 +1,16 @@
 #include "Magic.h"
 #include "Player.h"
 
+TexAnim _magic[] = {
+	{0,2},
+	{1,2},
+	{2,2},
+	{1,2},
+};
+TexAnimData Magic::_animData[] = {
+	ANIMDATA(_magic),
+};
+
 Magic::Magic(const CVector3D& pos, float ang)
 	:ObjectBase(eType_Magic)
 	, m_cnt(0)
@@ -9,19 +19,21 @@ Magic::Magic(const CVector3D& pos, float ang)
 	m_img = COPY_RESOURCE("Magic", CImage);
 	m_pos = pos;
 	m_vec = CVector3D(sin(ang), 0.0f, -cos(ang)) * MAGIC_SPEED;
+	m_img.ChangeAnimation(0);
 }
 
 void Magic::Update(){
+	m_img.UpdateAnimation();
 	m_pos += m_vec;
 	//3•bŒo‚Â‚Æíœ
 	if (m_cnt++ >= 180) SetKill();
 }
 
 void Magic::Draw(){
-	m_img.SetSize(20, 100);
-	m_img.SetCenter(10, 50);
+	m_img.SetSize(64, 64);
+	m_img.SetCenter(32, 32);
 	m_img.SetPos(CalcScreenPos());
-	m_img.SetAng(-m_ang);
+	m_img.SetAng(-m_ang - DtoR(90));
 	m_img.Draw();
 }
 

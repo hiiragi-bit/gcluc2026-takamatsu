@@ -53,6 +53,12 @@
     <ClInclude Include="Base\EnemyManager.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayerBullet.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Weaponicon.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -106,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="Base\EnemyManager.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayerBullet.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Weaponicon.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
