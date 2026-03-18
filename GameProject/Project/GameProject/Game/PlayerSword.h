@@ -1,7 +1,7 @@
 #pragma once
 #include "Base/ObjectBase.h"
 
-class PlayerAttack :public ObjectBase
+class PlayerSword :public ObjectBase
 {
 private:
 	CImage m_img;		//プレイヤーの攻撃の画像
@@ -11,7 +11,7 @@ private:
 
 public:
 	//コンストラクタ
-	PlayerAttack(const CVector3D& pos, bool flip, int type, int attack_no);
+	PlayerSword(const CVector3D& pos, bool flip, int type, int attack_no);
 	//更新処理
 	void Update();
 	//描画処理

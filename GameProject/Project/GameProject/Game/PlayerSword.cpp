@@ -1,10 +1,10 @@
-#include "PlayerAttack.h"
+#include "PlayerSword.h"
 #include "Witch.h"
 #include "Swordsman.h"
 #include "Hero.h"
 
 //コンストラクタ
-PlayerAttack::PlayerAttack(const CVector3D& pos, bool flip, int type, int attack_no)
+PlayerSword::PlayerSword(const CVector3D& pos, bool flip, int type, int attack_no)
 	:ObjectBase(eType_Effect)
 {
 	//反転フラグ
@@ -18,7 +18,7 @@ PlayerAttack::PlayerAttack(const CVector3D& pos, bool flip, int type, int attack
 }
 
 //更新処理
-void PlayerAttack::Update()
+void PlayerSword::Update()
 {
 	//アニメーション更新
 	m_img.UpdateAnimation();
@@ -31,18 +31,18 @@ void PlayerAttack::Update()
 }
 
 //描画処理
-void PlayerAttack::Draw()
+void PlayerSword::Draw()
 {
 	//DrawRect();
 }
 
 //当たり判定
-void PlayerAttack::Collision(ObjectBase* b)
+void PlayerSword::Collision(ObjectBase* b)
 {
-	
+
 	switch (b->m_type)
 	{
-	//魔法使いとの判定
+		//魔法使いとの判定
 	case eType_Witch:
 		if (m_type == eType_Effect)
 		{
@@ -52,12 +52,12 @@ void PlayerAttack::Collision(ObjectBase* b)
 					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
 					w->SetDamageNo(m_attack_no);
-					w->TakeDamage(1);
+					w->TakeDamage(3);
 				}
 			}
 		}
 		break;
-	//剣士との判定
+		//剣士との判定
 	case eType_Swordsman:
 		if (m_type == eType_Effect)
 		{
@@ -67,12 +67,12 @@ void PlayerAttack::Collision(ObjectBase* b)
 					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
 					s->SetDamageNo(m_attack_no);
-					s->TakeDamage(1);
+					s->TakeDamage(3);
 				}
 			}
 		}
 		break;
-	//勇者との判定
+		//勇者との判定
 	case eType_Hero:
 		if (m_type == eType_Effect)
 		{
@@ -82,7 +82,7 @@ void PlayerAttack::Collision(ObjectBase* b)
 					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
 					h->SetDamageNo(m_attack_no);
-					h->TakeDamage(1);
+					h->TakeDamage(3);
 				}
 			}
 		}

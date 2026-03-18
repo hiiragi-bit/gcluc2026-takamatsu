@@ -76,7 +76,7 @@ void PlayerBullet::Collision(ObjectBase* b)
 			{
 				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
 				{
-					w->TakeDamage(1);
+					w->TakeDamage(2);
 				}
 			}
 		}
@@ -89,7 +89,7 @@ void PlayerBullet::Collision(ObjectBase* b)
 			{
 				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
 				{
-					s->TakeDamage(1);
+					s->TakeDamage(2);
 				}
 			}
 		}
@@ -102,7 +102,7 @@ void PlayerBullet::Collision(ObjectBase* b)
 			{
 				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
 				{
-					h->TakeDamage(1);
+					h->TakeDamage(2);
 				}
 			}
 		}
