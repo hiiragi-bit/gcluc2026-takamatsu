@@ -15,7 +15,6 @@ Slash::~Slash()
 }
 
 void Slash::Update(){
-	m_pos = CalcScreenPos(true);
 	if (m_cnt++ >= 60) SetKill();
 }
 

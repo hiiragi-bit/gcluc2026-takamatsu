@@ -46,7 +46,7 @@ void Init(void)
 	CInput::SetButton(0, CInput::eButton1, 'Z');
 	CInput::SetButton(0, CInput::eButton2, 'X');
 	CInput::SetButton(0, CInput::eButton3, 'C');
-	CInput::SetButton(0, CInput::eButton4, VK_LSHIFT);
+	CInput::SetButton(0, CInput::eButton4, VK_RETURN);
 	CInput::SetButton(0, CInput::eButton5, VK_SPACE);
 	CInput::SetButton(0, CInput::eButton10, VK_RETURN);
 	CInput::SetButton(0, CInput::eUp, VK_UP);
@@ -121,6 +121,7 @@ void Init(void)
 	ADD_RESOURCE("Shadow", CImage::CreateImage("Enemy/Shadow.png"));
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
 	ADD_RESOURCE("Timer", CImage::CreateImage("Title/Timer.png"));
+	ADD_RESOURCE("Result", CImage::CreateImage("result/result.png"));
 
 	//’Ï
 	ADD_RESOURCE("Heart", CImage::CreateImage("UI/HP.png"));

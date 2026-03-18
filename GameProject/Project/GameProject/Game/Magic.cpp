@@ -15,7 +15,7 @@ Magic::Magic(const CVector3D& pos, float ang)
 	:ObjectBase(eType_Magic)
 	, m_cnt(0)
 	, m_ang(ang)
-	, m_range(CVector3D(50, 5, 50)) {
+	, m_range(CVector3D(100, 5, 100)) {
 	m_img = COPY_RESOURCE("Magic", CImage);
 	m_pos = pos;
 	m_vec = CVector3D(sin(ang), 0.0f, -cos(ang)) * MAGIC_SPEED;

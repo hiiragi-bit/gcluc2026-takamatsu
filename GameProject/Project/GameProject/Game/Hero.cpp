@@ -53,7 +53,7 @@ Hero::Hero(const CVector3D& pos)
 }
 
 Hero::~Hero(){
-	Game::m_game = true;
+	Game::m_game = false;
 }
 
 void Hero::Update(){
