@@ -1,10 +1,11 @@
 #include "Base/EnemyManager.h"
 #include "Game.h"
 #include "Title/Clear.h"
+#include"Game/MapObject.h"
+#include"Game/Map.h"
 
-int Game::m_playerHp = 0;
 int Game::m_time = 0;
-bool Game::m_game = false;
+bool Game::m_game = true;
 
 Game::Game()
 	: ObjectBase(eType_Scene)

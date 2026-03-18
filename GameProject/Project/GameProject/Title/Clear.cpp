@@ -6,7 +6,8 @@ Clear::Clear()
 	: ObjectBase(eType_Scene)
 	, m_cnt(0)
 	, m_time(0) {
-	m_img = COPY_RESOURCE("Title", CImage);
+	m_sky = COPY_RESOURCE("Sky", CImage);
+	m_ground = COPY_RESOURCE("Ground", CImage);
 	m_timer = COPY_RESOURCE("Timer", CImage);
 }
 
@@ -21,10 +22,10 @@ void Clear::Update() {
 
 
 void Clear::Draw(){
-	m_img.SetSize(1920, 1080);
-	m_img.SetPos(GetScreenPos(m_pos));
-	m_img.SetFlipV(true);
-	m_img.Draw();
+	m_sky.SetSize(1920, 1080);
+	m_sky.Draw();
+	m_ground.SetSize(1920, 1080);
+	m_ground.Draw();
 
 	//ê≥ÇµÇ¢éûä‘Ç…ïœçX
 	int time = Game::m_time;
