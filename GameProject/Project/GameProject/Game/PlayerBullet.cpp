@@ -43,14 +43,6 @@ void PlayerBullet::Update()
 		m_pos.x -= movespeed;
 	else
 		m_pos.x += movespeed;
-	if (m_pos.x < 0)
-	{
-		SetKill();
-	}
-	else if (m_pos.x > 1920)
-	{
-		SetKill();
-	}
 }
 
 //ï`âÊèàóù
@@ -59,7 +51,7 @@ void PlayerBullet::Draw()
 	m_img.SetPos(CalcScreenPos());
 	m_img.SetFlipH(m_flip);
 	m_img.Draw();
-	DrawRect();
+	//DrawRect();
 }
 
 //ìñÇΩÇËîªíË
@@ -74,8 +66,10 @@ void PlayerBullet::Collision(ObjectBase* b)
 		{
 			if (Witch* w = dynamic_cast<Witch*>(b))
 			{
-				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
+				if (m_attack_no != w->GetDamageNo() && CollisionRect(this, b)
+					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
+					w->SetDamageNo(m_attack_no);
 					w->TakeDamage(2);
 				}
 			}
@@ -87,8 +81,10 @@ void PlayerBullet::Collision(ObjectBase* b)
 		{
 			if (Swordsman* s = dynamic_cast<Swordsman*>(b))
 			{
-				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
+				if (m_attack_no != s->GetDamageNo() && CollisionRect(this, b)
+					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
+					s->SetDamageNo(m_attack_no);
 					s->TakeDamage(2);
 				}
 			}
@@ -100,8 +96,10 @@ void PlayerBullet::Collision(ObjectBase* b)
 		{
 			if (Hero* h = dynamic_cast<Hero*>(b))
 			{
-				if (CollisionRect(this, b) && abs(m_pos.z - b->m_pos.z) < 200)
+				if (m_attack_no != h->GetDamageNo() && CollisionRect(this, b)
+					&& abs(m_pos.z - b->m_pos.z) < 200)
 				{
+					h->SetDamageNo(m_attack_no);
 					h->TakeDamage(2);
 				}
 			}
