@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "PlayerAttack.h"
 #include "PlayerBullet.h"
+#include "PlayerSword.h"
 #include "Shadow.h"
 #include "Witch.h"
 #include "Swordsman.h"
@@ -220,6 +221,15 @@ void Player::StateAttack()
 				m_attack_no));
 		else
 			ObjectBase::Add(new PlayerBullet(m_pos + CVector3D(200, -100, -200), m_flip, eType_Effect,
+				m_attack_no));
+	}
+	else if (m_mode == eModeSword)
+	{
+		if (m_flip)
+			ObjectBase::Add(new PlayerSword(m_pos + CVector3D(-150, 100, 0), m_flip, eType_Effect,
+				m_attack_no));
+		else
+			ObjectBase::Add(new PlayerSword(m_pos + CVector3D(200, -100, -200), m_flip, eType_Effect,
 				m_attack_no));
 	}
 	else

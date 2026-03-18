@@ -30,6 +30,7 @@
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\PlayerAttack.h" />
     <ClInclude Include="Game\PlayerBullet.h" />
+    <ClInclude Include="Game\PlayerSword.h" />
     <ClInclude Include="Game\Shadow.h" />
     <ClInclude Include="Game\Slash.h" />
     <ClInclude Include="Game\Swordsman.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\PlayerAttack.cpp" />
     <ClCompile Include="Game\PlayerBullet.cpp" />
+    <ClCompile Include="Game\PlayerSword.cpp" />
     <ClCompile Include="Game\Shadow.cpp" />
     <ClCompile Include="Game\Slash.cpp" />
     <ClCompile Include="Game\Swordsman.cpp" />
