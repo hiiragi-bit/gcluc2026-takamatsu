@@ -4,7 +4,7 @@
 //¶¬ãŒÀ
 #define MAX_ENEMY 10
 //Š´’m”ÍˆÍ
-#define SPAWN_RANGE CVector3D(500, 0, 250)
+#define SPAWN_RANGE CVector3D(800, 0, 500)
 //“G¶¬‚É‰ÁZ‚·‚éx
 #define SPAWN_X 750
 //Œ•m¶¬‚Ìz

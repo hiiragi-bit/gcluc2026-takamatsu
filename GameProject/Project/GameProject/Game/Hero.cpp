@@ -1,5 +1,6 @@
 #include "Hero.h"
 #include "Magic.h"
+#include "Game.h"
 #include "Player.h"
 #include "Slash.h"
 
@@ -51,8 +52,8 @@ Hero::Hero(const CVector3D& pos)
 	m_rect = CRect(-48, -112, 48, 0);
 }
 
-Hero::~Hero()
-{
+Hero::~Hero(){
+	Game::m_game = true;
 }
 
 void Hero::Update(){

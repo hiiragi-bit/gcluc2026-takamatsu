@@ -3,7 +3,8 @@
 
 class Clear :public ObjectBase {
 private:
-	CImage m_img;
+	CImage m_sky;
+	CImage m_ground;
 	CImage m_timer;
 	int m_cnt;
 	int m_time;
