@@ -16,7 +16,7 @@ Game::Game()
 	objcnt = 0;
 	EnemyManager::Instance();
 	ObjectBase::Add(new Player(CVector3D(100, 0, 0), false));
-	ObjectBase::Add(new Field());
+	ObjectBase::Add(new Map());
 	ObjectBase::Add(new HP(CVector3D(50, 50, 0)));
 	ObjectBase::Add(new Hero(CVector3D(8000, 0, 3)));
 	
