@@ -5,6 +5,7 @@
 #include "Game/Swordsman.h"
 #include "Game/Witch.h"
 #include "Game/PlayerBullet.h"
+#include"Game/Field.h"
 #include "Title/Title.h"
 
 void MainLoop(void) {
@@ -130,6 +131,8 @@ void Init(void)
 	ADD_RESOURCE("Fence", CImage::CreateImage("Map/fence.png"));
 	ADD_RESOURCE("Box", CImage::CreateImage("Map/box.png"));
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
+	ADD_RESOURCE("Field", CImage::CreateImage("Map/Forest.png"));
+	ADD_RESOURCE("Ground2", CImage::CreateImage("Map/Ground2.png"));
 	ObjectBase::Add(new Title());
 
 	
