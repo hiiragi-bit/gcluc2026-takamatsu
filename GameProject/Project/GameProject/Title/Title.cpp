@@ -8,8 +8,8 @@ Title::Title()
 }
 
 void Title::Update(){
-	//ボタン4でタイトル破棄
-	if (m_cnt++ > 2 && PUSH(CInput::eButton4)) {
+	//ボタン10でタイトル破棄
+	if (m_cnt++ > 2 && PUSH(CInput::eButton10)) {
 		//全てのオブジェクトを破壊
 		ObjectBase::KillAll();
 		//ゲームシーンへ

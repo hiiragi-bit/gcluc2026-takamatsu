@@ -59,6 +59,9 @@
     <ClInclude Include="UI\Weaponicon.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayerSword.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="UI\Weaponicon.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayerSword.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "Game/Swordsman.h"
 #include "Game/Witch.h"
 #include "Game/PlayerBullet.h"
+#include"Game/Field.h"
 #include "Title/Title.h"
 
 void MainLoop(void) {
@@ -46,7 +47,7 @@ void Init(void)
 	CInput::SetButton(0, CInput::eButton1, 'Z');
 	CInput::SetButton(0, CInput::eButton2, 'X');
 	CInput::SetButton(0, CInput::eButton3, 'C');
-	CInput::SetButton(0, CInput::eButton4, VK_RETURN);
+	CInput::SetButton(0, CInput::eButton4, VK_LSHIFT);
 	CInput::SetButton(0, CInput::eButton5, VK_SPACE);
 	CInput::SetButton(0, CInput::eButton10, VK_RETURN);
 	CInput::SetButton(0, CInput::eUp, VK_UP);
@@ -131,6 +132,8 @@ void Init(void)
 	ADD_RESOURCE("Fence", CImage::CreateImage("Map/fence.png"));
 	ADD_RESOURCE("Box", CImage::CreateImage("Map/box.png"));
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
+	ADD_RESOURCE("Field", CImage::CreateImage("Map/Forest.png"));
+	ADD_RESOURCE("Ground2", CImage::CreateImage("Map/Ground2.png"));
 	ObjectBase::Add(new Title());
 
 	

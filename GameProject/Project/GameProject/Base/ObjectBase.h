@@ -15,6 +15,7 @@ enum {
     eType_Map,
     eType_Shadow,
 	eType_Box,
+	eType_Field,
     eType_Fence,
 	eType_Well,
     eType_Player,
