@@ -351,6 +351,8 @@ void Player::Update()
 	}
 	if (m_pos.z > MAX_Z) m_pos.z = MAX_Z;
 	if (m_pos.z < MIN_Z) m_pos.z = MIN_Z;
+	//ˆÚ“®§ŒÀ
+	if (m_pos.x < 0) m_pos.x = 0;
 
 	//ƒXƒNƒ[ƒ‹Ý’è
 	m_scroll.x = m_pos.x - 1920 / 2;

@@ -41,7 +41,7 @@ void Game::Update(){
 	if (Player* p = dynamic_cast<Player*>(ObjectBase::FindObject(eType_Player))) {
 		m_playerPos = p->m_pos;
 	}
-	if (HP::UI_hp == 0 && !ObjectBase::FindObject(eType_Player)) {
+	if (HP::UI_hp <= 0 && !ObjectBase::FindObject(eType_Player)) {
 		m_deathCnt++;
 		HP::UI_hp = 6;
 		m_hp = 6;

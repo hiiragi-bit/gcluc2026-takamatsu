@@ -134,6 +134,7 @@ void Init(void)
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title.png"));
 	ADD_RESOURCE("Field", CImage::CreateImage("Map/Forest.png"));
 	ADD_RESOURCE("Ground2", CImage::CreateImage("Map/Ground2.png"));
+	ADD_RESOURCE("Hause", CImage::CreateImage("Map/Hause.png"));
 	ObjectBase::Add(new Title());
 
 	

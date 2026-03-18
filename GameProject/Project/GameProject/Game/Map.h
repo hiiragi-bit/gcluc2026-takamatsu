@@ -6,6 +6,8 @@ class Map : public ObjectBase {
 private:
     CImage m_sky;
 	CImage m_ground;
+    CImage m_house;
+    CImage m_house2;
     int state;
 	
     CVector3D sc;
